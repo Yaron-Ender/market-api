@@ -1,0 +1,137 @@
+.form-container{
+display:grid;
+gap:1.5vmax;
+text-align: center;
+& > form.form.seller-form-container{
+@include grid-col(1fr 1fr,1fr,2em 1em);
+& > .btn{
+grid-column:1 / 3;
+}
+}
+& > form.form.seller-form-container.mobile{
+@include flx-col();
+& > .input-wrapper.input-wrapper.profile-avatar{
+margin-bottom:0.5em;
+}
+}
+& > .form{
+width:90%;   
+margin-inline:auto; 
+display:grid;
+justify-content: center;
+gap:1em;
+max-width: calc($_size * 20);
+font-size: $_size;
+padding:1em;
+//glatial efect
+background:hsla(0, 0%, 100%, 0.2);
+-webkit-backdrop-filter: blur($blur);
+backdrop-filter:blur($blur);
+border:1px solid #fff;
+box-shadow:0 6px 35px rgba(0,0,0,0.7);
+border-radius:$_radius*1.8;
+& > .input-wrapper{
+width: 100%;
+position: relative;
+display: grid;
+margin-top:0.1em;
+& > .form-label{
+text-transform: uppercase;
+font-size: 0.7em;
+letter-spacing: 0.05em;
+margin-inline: 0.45em;
+position: absolute;
+top:0%;
+transform: translateY(5%);
+padding: 0.1em 0.35em;
+background-color:hsl( $muted--light);
+transition:transform  $_tspeed_fast $_ttype_squish,
+background-color  $_tspeed_fast $_ttype_squish;
+}
+& > input{
+align-self: flex-start;
+border-radius:$_radius;
+background-color:hsl( $muted--light);  
+caret-color: hsl($accent--light);
+box-shadow: 0 0 0 -0.1em hsl($bg--light),
+0 0 0 -0.2em hsl($accent--light);
+transition: box-shadow $_tspeed_slow $_ttype_squish;
+&:is(:focus){
+outline:none;
+box-shadow: 0 0 0 0.2em hsl($bg--light),
+0 0 0 0.4em hsl($accent--light);
+& ~ .form-label{
+transform: translate3d(0,-1.2em,0);
+background-color:hsl($bkg) ;
+color:hsl($accent--light);
+}
+}
+&::placeholder{
+opacity:0;
+}
+&#password:is(:focus:invalid){
+ box-shadow: 0 0 0 0.2em hsl($bg--light),
+    0 0 0 0.4em hsl($warning);
+}
+}
+//style for password "password must be 6..."
+&:has(#password) > small.password{
+display:none;
+}
+&:has(#password:focus) > small.password{
+display: block;
+position: relative;
+top:0.3em;
+left:0;
+ color: aqua;
+background-color:hsl( $muted--light-op-2);
+font-weight:bold;
+padding:0.2em 0;
+@include easeOut;
+}
+
+&:has(:is(input:not(:focus)):not(:placeholder-shown)) .form-label{
+transform: translate3d(0,-1.2em,0);
+background-color:hsl($bkg) ;
+color:hsl($accent--light);
+}
+&  .err-msg{
+width: 98%;
+margin-inline:auto;
+border-radius: $_radius;
+ color:crimson;
+ font-weight: bold;
+background-color:hsl( $muted--light-op-2);
+padding:0.1em 0;
+}
+}
+&:has(#password:is(:valid)) small{
+transform: translateY(-1em);
+opacity:0;
+z-index:1;
+}
+&:has(#password:is(:valid)) >.input-wrapper.profile-avatar{
+position: relative;
+@include easeOut;
+transform: translateY(-2em);
+}
+& > .input-wrapper.profile-avatar > input{
+opacity:0;
+}
+& > .input-wrapper.profile-avatar > label{
+width:100%;
+padding:0.3em ;
+position: absolute;
+top:0;
+left:0;
+border-radius:$_radius;
+background-color:hsl( $muted--light);  
+box-shadow: 0 0 0 -0.1em hsl($bg--light),
+0 0 0 -0.2em hsl($accent--light);
+cursor: pointer;
+}
+& > .btn{
+margin-inline:auto;
+}
+}
+}

@@ -1,0 +1,99 @@
+  /* fonts */
+  $fs-200: clamp(0.78rem, calc(0.71rem + 0.35vw), 0.96rem);
+  $fs-300: clamp(0.94rem, calc(0.84rem + 0.51vw), 1.2rem);
+  $fs-320: clamp(0.96rem, calc(0.93rem + 0.61vw), 1.35rem);
+  $fs-400: clamp(1.13rem, calc(0.98rem + 0.73vw), 1.5rem);
+  $fs-500: clamp(1.94rem, calc(1.56rem + 1.92vw), 2.93rem);
+  $fs-600: clamp(2.8rem, calc(2.11rem + 3.47vw), 4.58rem);
+  $lh-1: 1;
+  $lh-1-1: 1.1;
+  $lh-1-4: 1.4;
+  
+  /* colors */
+  $accent: 183 74% 44%;
+  $bkg: 190 60% 98%;
+  $text: 185 26% 9%;
+  $muted: 183 8% 55%;
+  $light: 180 14% 85%;
+  $warning: 4 66% 63%;
+  $_hue: 275;
+  $white:#ffff;
+  /* gray */
+  $grayLight-1:215 46% 93%;
+   $grayLight-2:225 39% 85%;
+  /* Light Mode */
+  $bg--light:$_hue 30% 94%;
+  $txt--light:$_hue 40% 75%;
+  $accent--light:$_hue 55% 50%;
+  $accent--light-hover:$_hue 55% 55%;
+  $accent--light-disable:$_hue 55% 70%;
+  $muted--light:$_hue 90% 93%;
+  $muted--light-op-2:$_hue 90% 13%;
+  $blur:1px;
+  /* Dark Mode */
+  $bg--dark:$_hue 15% 10%;
+  $txt--dark:$_hue 45% 45%;
+  $accent--dark:$_hue 50% 50%;
+  $muted--dark:$_hue 20% 4%;
+  /* utils */
+  $space-xs: 8px;
+  $space-sm: 16px;
+  $space-md: 24px;
+  $space-lg: 32px;
+  $space-xl: 40px;
+  $content-sm: 40ch;
+  $content: 60ch;
+  $round-sm: 4px;
+  $round-md: 10px;
+  $round-lg: 25px;
+  $round-full: 100vmax;
+
+ $_size:1.6em;
+  $_radius: 0.2em;
+  //MIXIN
+  //transition
+  $_tspeed_fast: 150ms;//transtion
+  $_tspeed_slow: 400ms;
+  $_ttype_squish: cubic-bezier(0.86, -0.1, 0.27, 1.15);
+  @mixin easeOut{
+ transition: all 0.5s ease-out;
+  };
+ 
+//shadow
+@mixin insetShadow{
+box-shadow:inset .2rem .2rem .5rem hsl($grayLight-2), 
+inset -.2rem -.2rem .5rem $white;
+};
+//layout
+@mixin flx-row($jusfity:center,$align:center,$gap:0){
+display: flex;
+flex-flow:row wrap;
+justify-content:$jusfity;
+align-items:$align;
+gap:$gap
+  };
+  @mixin flx-col($jusfity:center,$align:center,$gap:1em){
+display: flex;
+flex-flow: column wrap;
+justify-content:$jusfity;
+align-items:$align;
+gap:$gap;
+@content
+  };
+@mixin grid-col($col:1fr,$row:1fr,$gap:0){
+display: grid;
+grid-template-columns:$col;
+grid-template-rows:$row;
+gap:$gap;
+@content
+};
+@mixin grid-flow-row(){
+display: grid;
+grid-auto-flow: row;
+@content
+};
+@mixin grid-flow-col(){
+display: grid;
+grid-auto-flow:column;
+place-items:center;
+}

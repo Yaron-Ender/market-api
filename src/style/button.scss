@@ -1,0 +1,63 @@
+
+.btn{
+  max-width: fit-content;
+  display: flex;
+  place-items: center;
+  gap: 0.5em;
+  background-color: hsl($accent--light);
+  color: hsl($bg--light);
+  text-decoration: none;
+  padding: 0.4em 1.4em;
+  border-radius:$_radius;
+  box-shadow: 0.05em 0.1em 0.9em  hsl($accent--light),
+    0 0 0 -0.1em hsl($bg--light), 0 0 0 -0.2em hsl($accent--light);
+transition:transform  $_tspeed_fast $_ttype_squish,
+           background-color  $_tspeed_fast $_ttype_squish;
+&:where(svg, img, span) {
+  pointer-events: none;
+}
+&:is(:active, :hover) {
+  background-color:hsl($accent--light-hover) ;
+  box-shadow:0 0 0 0.2rem hsl($bkg),
+   0 0 0 0.3em hsl($accent--light)
+   ;
+}
+&:focus {
+  outline: none;
+}
+&:focus-visible {
+box-shadow: 0 0 0 0.2em hsl($bg--light),
+    0 0 0 0.3em hsl($accent--light);
+}
+&:disabled{
+background-color:hsl( $accent--light-disable);
+box-shadow:none;
+}
+&.btn-black{
+background-color: hsl($bg--dark);
+box-shadow:none;
+&:is(:hover){
+ color:hsl($bg--dark);
+ background-color:hsl($bkg); 
+font-weight: bold;  
+box-shadow: 0 0 0 0.2em hsl($bkg),
+    0 0 0 0.3em hsl($bg--dark);
+}
+}
+&.btn-regestration{
+padding:0.7em 2.8em;
+font-size:$fs-400;
+color:hsl($grayLight-1);
+background-color: transparent;
+box-shadow: 0.05em 0.1em 0.9em  hsl($grayLight-1),
+0 0 0 -0.1em hsl($bg--light), 0 0 0 -0.2em hsl($accent--light);
+&:hover{
+ @include insetShadow;
+  }
+&:active{
+@include easeOut;
+transform: translateY(0.2em);
+}
+}
+}
+

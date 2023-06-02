@@ -1,0 +1,145 @@
+
+.navbar{
+padding:0.7em 0.5em;
+width:100%;
+@include flx-col(center,flex-start);
+overflow: hidden;
+& > h3{
+span.accent{
+color:hsl($txt--dark);
+}
+}
+& > ul.menu-container{
+width:100%; 
+@include flx-row(space-between,center);
+& > a{
+width: max-content;
+border: 2px solid hsl($accent--light);
+display:flex;
+place-content: center;
+place-items:center;
+    &.warning{
+font-size:$fs-200;
+background-color: hsl($warning);
+color:hsl($bkg);
+border:1px solid hsl($bkg);
+&:is(:active, :hover){
+    box-shadow:0 0 0 0.2rem hsl($bkg),
+        0 0 0 0.4em hsl($warning);
+}
+    }
+& > span{
+margin-inline: 0.3em;
+}
+@media screen and (max-width:740px){
+    & > span{
+        display: none;
+    }    
+}
+}
+
+}
+& > .bars-icon-container{
+display:none;
+width:2.5em;
+@include easeOut;
+& > .line-bar{
+width:80%;
+margin-inline:auto;
+height:0.2em;
+background-color:hsl($txt--dark);
+@include easeOut;
+}
+&:is(.rotateFirst){
+& > :is(.line-bar:nth-child(1)){
+ transform:translateY(.5em) rotate(45deg) ;
+}
+& > :is(.line-bar:nth-child(3)){
+ transform:translateY(-.4em) rotate(-45deg) ;
+}
+& > :is(.line-bar:nth-child(2)){
+ transform:translateY(-.4em) rotatey(90deg) ;
+}
+}
+}
+@media screen and (max-width:520px){
+display: grid;
+grid-template-columns:1fr 1fr;
+& > h3{
+grid-area:1 / 2 / 2 / 3;
+}
+& > ul.menu-container{
+& > a{
+padding: 0;
+border:0;
+box-shadow:0;
+}   
+& > a > span{
+ display: block;
+ }
+  & > a > :nth-child(2){
+display: none;
+ }
+}
+&:not(:has( > .rotate)) > ul.menu-container{
+display: none;
+}
+&:has( > .rotate) > ul.menu-container{
+grid-area:2/1/3/3;
+@include flx-col(center,center);
+padding:0;
+& > a{
+    @for $a from 1 through 3{
+        &:nth-child(#{$a}){
+    @include easeOut;
+transition-delay:0.1s*$a;
+transform: translate3d(-20rem,-5rem,0) rotate(90deg);
+transform: translateX(-25rem);
+}
+}  
+}
+}
+&:has(> .rotateFirst) > h3{
+display: none;
+}
+&:has(> .rotateFirst) >ul.menu-container{
+padding:0;
+grid-area:2/1/3/3;
+@include flx-col(center,center);
+& > a{
+    @for $a from 1 through 3{
+        &:nth-child(#{$a}){
+    @include easeOut;
+transition-delay:0.1s*$a;
+transform: translate3d(-20rem,-5rem,0) rotate(90deg);
+}
+}    
+}
+}
+&:has(>.rotateFirst.rotate) > ul.menu-container{
+& > a{
+@for $a from 1 through 3{
+&:nth-child(#{$a}){
+transition-delay:0.1s*$a;
+}
+}
+@include easeOut;
+transform: translate3d(0rem,0,0);
+} 
+}
+& > .bars-icon-container{
+display:inline-flex;
+ flex-direction: column;
+cursor: pointer;
+gap:.3em;
+}
+}
+}
+@keyframes show-icon-animation{
+0%{
+  transform: translateX(-50px);  
+}
+100%{
+    transform: translateX(50px);
+}
+}

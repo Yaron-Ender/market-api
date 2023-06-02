@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../component/Navbar";
+import wave from '../assets/wave.svg'
 const RootLayout = () => {
     return (
-      <div>
-        <h1>hai hai</h1>
+      <div className="rootLayout">
+        <Navbar />
         <main>
-  <Outlet />
+          <Outlet />
         </main>
+        {/* <img src={wave} alt="wave"></img> */}
       </div>
     );
 };
