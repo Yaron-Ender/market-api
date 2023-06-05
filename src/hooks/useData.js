@@ -5,6 +5,15 @@ export const useData =()=>{
    {value:'center',label:'center'},
    {value:'south',label:'south'},
    ] 
+// sellers producrs
+const sellerProducts = [
+{value:'Tomato',label:'Tomato'},
+{value:'Carrot',label:'Carrot'},
+{value:'Apple',label:'Apple'},
+{value:'Peach',label:'Peach'},
+{value:'Malon',label:'Malon'},
+{value:'Orange',label:'Orange'},
+]
 //styl forSelect
 const regionSelect ={
 control:(styles)=>({
@@ -19,5 +28,5 @@ option:(styles,{isFocused})=>({
  backgroundColor:isFocused?'hsl(275 90% 93%)':''
 })
 }
-return { sellersRegion, regionSelect };
+return { sellersRegion, regionSelect,sellerProducts };
 } 

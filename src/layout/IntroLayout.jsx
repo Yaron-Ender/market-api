@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import {Outlet,Link} from "react-router-dom";
+import {Outlet,Link,useLocation} from "react-router-dom";
 const IntroLayout = () => {
+// console.log(params)
+// console.log(searchParams.get('login'))
+const location = useLocation()
+console.log(location.pathname)
 const [mobile,setMobile]=useState(false);
 useEffect(()=>{
 if(window.innerWidth<520){
@@ -16,6 +20,7 @@ if(window.innerWidth<520){
 
 </div>
 <main className={`${mobile?'mobile':''}`}>
+{location.pathname!=='/login'&&
 <div className="registration-pannel">
 <div className="seller">
 <Link to='signup' state={{seller:true}} className="btn btn-regestration">Seller</Link>
@@ -24,6 +29,7 @@ if(window.innerWidth<520){
 <Link to='signup' state={{seller:false}}   className="btn btn-regestration">Buyer</Link>
 </div>
 </div>
+}
 <Outlet />    
 </main>
 </div>
@@ -31,23 +37,3 @@ if(window.innerWidth<520){
   );
 };
 export default IntroLayout;
-//loader
-// export function introLoader() {
-// const { user,authIsReady } = useAuthContext()
-// return{user,authIsReady}
-
-// }
-
-//action
-// export async function introAction({ request }) { 
-//    const { signup } = useSignup();
-//   const data = await request.formData();
-//   const {displayName,email,password,...values} = Object.fromEntries(data)
-//   if(values._action==='signup'){
-//  try{
-// return redirect('/')
-//  }catch(err){
-//  throw new Error(err.message)
-//  }
-//   }
-// }

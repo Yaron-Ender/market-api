@@ -18,14 +18,14 @@ border: 2px solid hsl($accent--light);
 display:flex;
 place-content: center;
 place-items:center;
-    &.warning{
+&.warning{
 font-size:$fs-200;
 background-color: hsl($warning);
 color:hsl($bkg);
 border:1px solid hsl($bkg);
 &:is(:active, :hover){
-    box-shadow:0 0 0 0.2rem hsl($bkg),
-        0 0 0 0.4em hsl($warning);
+ box-shadow:0 0 0 0.2rem hsl($bkg),
+    0 0 0 0.4em hsl($warning);
 }
     }
 & > span{

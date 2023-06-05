@@ -32,15 +32,13 @@ await uploadBytes(imageRef,thumbnail);
  await updateProfile(user, { displayName,photoURL });
 }
 setIsPending(false)
-
 //create user in firestore
-
 const docReff =doc(db,'users',user.uid)
 const userDoc= await getDoc(docReff)
 if(!userDoc.exists()){
 setDoc(docReff, { displayName, id: user.uid, photoURL, phoneNumber, region,seller:true }); 
 dispatch({ type: "LOGIN", payload: {...user,phoneNumber,seller:true} });
-navigate('/')
+navigate('/seller')
 }
 }catch(err){
 console.log(err.message)
@@ -58,13 +56,14 @@ if(!user){
 throw new Error('there was problem to form your account')
 }
 setIsPending(false)
+ await updateProfile(user, { displayName });
 //create user in firestore
 const docReff =doc(db,'users',user.uid)
 const userDoc= await getDoc(docReff)
 if(!userDoc.exists()){
 setDoc(docReff, { displayName, id: user.uid,seller:false}); 
 dispatch({ type: "LOGIN", payload: { ...user,seller: false } });
-navigate('/')
+navigate('/buyer')
 }
 }catch(err){
 console.log(err.message)
@@ -74,5 +73,3 @@ setIsPending(false)
 };
  return {signupSeller,signupBuyer,isPending,errorMsg } 
 }
-
-//Firebase: Error (auth/email-already-in-use).

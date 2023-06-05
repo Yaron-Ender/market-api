@@ -15,9 +15,9 @@ useEffect(() => {
   document.forms.login.elements[0].focus();
 }, []);
     return (
-   <div className="form-container">
+   <div className="form-container" id="login">
 <h2>login</h2> 
-<form name='login' className="form" onSubmit={handleLoginForm}>
+<form  name='login' className="form" onSubmit={handleLoginForm}>
 <div className="input-wrapper">
 <input type="email" id='email' name="email" placeholder="email" autoComplete="email" onChange={(e)=>{setEmail(e.target.value)}} value={email} required/>
 <label htmlFor="email" className="form-label">Email</label> 

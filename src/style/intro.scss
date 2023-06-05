@@ -26,6 +26,10 @@ backdrop-filter:blur($blur*15);
  border-radius:$_radius*1.8;
 }
 }
+//make the login comp at the middle
+&:has( > #login){
+@include flx-row();
+}
 }
 & > main:not(.mobile){
 &:has( > .form-container){
@@ -37,7 +41,6 @@ justify-items: center;
 }
 }
 }
-
 & img{
 align-self: flex-end;
 width:100%;

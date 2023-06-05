@@ -1,18 +1,20 @@
 
 import './app.scss'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+//react toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //layouts
 import RootLayout from './layout/RootLayout';
 import IntroLayout from './layout/IntroLayout';
-import TransactionLayout from './layout/TransactionLayout';
+import SellerLayout from './layout/SellerLayout'
+import BuyerLayout from './layout/BuyerLayout';
 //pages
 import Error from './pages/Error';
 import NotFound from './pages/NotFound';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 //action & loader
-//  import { introLoader } from './layout/IntroLayout'
- import { loader as transactionLoader } from './layout/TransactionLayout';
 function App() {
 const router = createBrowserRouter([
 {
@@ -23,8 +25,6 @@ const router = createBrowserRouter([
    path:'/',
   element:<IntroLayout />,
   errorElement: <Error />,
-  // loader:introLoader,
-  // action:introAction,
     children:[
     {
     path:'signup',
@@ -34,14 +34,21 @@ const router = createBrowserRouter([
     path:'login',
     element:<Login />
     },
-    {
-    path:'transaction',
-    element:<TransactionLayout />,
-    errorElement:<Error />,
-    loader:transactionLoader,
-    }
-    ]
-  },
+  ]
+},
+{
+path:'seller',
+element:<SellerLayout />,
+errorElement:<Error />,
+},
+{
+path:'buyer',
+element:<BuyerLayout />,
+errorElement:<Error />,
+},
+{
+path:'/logout',
+}
   ]
 },
 //  {
@@ -50,12 +57,11 @@ const router = createBrowserRouter([
 //  },
 ]);
   return (
-      <div>
- <RouterProvider router={router} />
-      </div>
-  
-    
-  )
+<div>
+  <RouterProvider router={router} />
+  <ToastContainer />
+</div>
+  );
 }
 
 export default App
