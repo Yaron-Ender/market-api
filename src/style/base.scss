@@ -86,5 +86,8 @@ a:is(:active, :hover) {
 box-shadow:0 0 0 0.2rem hsl($bkg),
    0 0 0 0.3em hsl($accent--light);
 }
+ul{
+list-style-type:none;
+}
 
 

@@ -4,14 +4,16 @@ import { auth,db,storage } from "../firebase/firebaseConfig"
  import { doc,getDoc,setDoc } from "firebase/firestore";
  import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useAuthContext } from "./useAuthContext";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
  export const useSignup = ()=>{
  const { dispatch } = useAuthContext();
  const [isPending,setIsPending]=useState(false);
  const[errorMsg,setErrorMsg]=useState(null);
  const navigate = useNavigate()
+//************************** */
 //Signup function for sellers
+//************************** */
 const signupSeller = async(email,password,displayName,phoneNumber,region,thumbnail)=>{
 setIsPending(true)
 setErrorMsg(null)
@@ -36,8 +38,14 @@ setIsPending(false)
 const docReff =doc(db,'users',user.uid)
 const userDoc= await getDoc(docReff)
 if(!userDoc.exists()){
-setDoc(docReff, { displayName, id: user.uid, photoURL, phoneNumber, region,seller:true }); 
+setDoc(docReff, { displayName, id: user.uid, photoURL, phoneNumber, region,seller:true,online:true, }); 
 dispatch({ type: "LOGIN", payload: {...user,phoneNumber,seller:true} });
+//create products document
+const docRefProduct = doc(db,'products',user.uid)
+const productsDoc =await getDoc(docRefProduct)
+if(!productsDoc.exists()){
+ setDoc(docRefProduct,{id:user.uid,region,products:[]})
+}
 navigate('/seller')
 }
 }catch(err){
@@ -46,7 +54,9 @@ setErrorMsg(err.message)
 setIsPending(false)
 }
 }
+//************************** */
 //Signup function for buyres
+//************************** */
 const signupBuyer =async(email, password, displayName) => {
 setIsPending(true)
 setErrorMsg(null)

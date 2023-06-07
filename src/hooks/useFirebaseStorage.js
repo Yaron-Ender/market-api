@@ -4,7 +4,6 @@ export const usefirebaseStorage = ()=>{
 
  const deleteFromStorage = async(photoURL)=>{
  const imageRef = ref(storage,`${photoURL}`)
- console.log(imageRef)
  try{
 const photoURL=await getDownloadURL(imageRef);  
 if(!photoURL){

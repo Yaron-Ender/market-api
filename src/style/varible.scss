@@ -1,3 +1,6 @@
+  /*Font Familiy*/
+  @import url('https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Cinzel:wght@400;500&family=Indie+Flower&family=Patrick+Hand&family=Poppins:ital,wght@0,100;0,200;0,400;1,200;1,300;1,400;1,700&family=Raleway:ital,wght@0,100;0,300;1,100;1,400;1,500&family=Slabo+27px&display=swap');
+  
   /* fonts */
   $fs-200: clamp(0.78rem, calc(0.71rem + 0.35vw), 0.96rem);
   $fs-300: clamp(0.94rem, calc(0.84rem + 0.51vw), 1.2rem);
@@ -15,12 +18,15 @@
   $text: 185 26% 9%;
   $muted: 183 8% 55%;
   $light: 180 14% 85%;
-  $warning: 4 66% 63%;
+  $warning:5 80% 65%;
   $_hue: 275;
   $white:#ffff;
   /* gray */
   $grayLight-1:215 46% 93%;
    $grayLight-2:225 39% 85%;
+    /* Turqiuz */
+  $accent-turq: 183 74% 44%;
+  $accent-turq-light: 180 55% 90%;
   /* Light Mode */
   $bg--light:$_hue 30% 94%;
   $txt--light:$_hue 40% 75%;
@@ -29,6 +35,7 @@
   $accent--light-disable:$_hue 55% 70%;
   $muted--light:$_hue 90% 93%;
   $muted--light-op-2:$_hue 90% 13%;
+  $mute-border-color:183 8% 55%;
   $blur:1px;
   /* Dark Mode */
   $bg--dark:$_hue 15% 10%;
@@ -57,6 +64,15 @@
   $_ttype_squish: cubic-bezier(0.86, -0.1, 0.27, 1.15);
   @mixin easeOut{
  transition: all 0.5s ease-out;
+  };
+  @mixin easeOut-fast{
+ transition: all 0.2s ease-out;
+  };
+  @mixin squish-fast{
+ transition: all $_tspeed_fast $_ttype_squish;
+  };
+  @mixin squish-slow{
+ transition: all $_tspeed_slow $_ttype_squish;
   };
  
 //shadow

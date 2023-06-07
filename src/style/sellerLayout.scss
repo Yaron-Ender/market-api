@@ -1,0 +1,116 @@
+
+.seller-layout{
+ border:3px solid red;
+ padding:1em;
+ @include flx-col(center,flex-start); 
+ overflow-x: hidden; 
+ & > .add-product-container{
+padding:2em 1em;
+border-radius:$_radius;
+box-shadow: 0.25em 0.3em 1em hsl($muted);
+border-top: 0.15em solid white;
+border-left: 0.15em solid white;
+& > .form{
+@include flx-col();
+& > .upper-container{
+width:100%;
+@include flx-row(flex-start,flex-start,2rem);
+& > .input-wrapper:last-child{
+max-width:50%;
+}
+}
+& > .output-container{
+width:100%;
+@include flx-row(center,center,2em);
+& >h3{
+color:hsl($txt--dark);
+border-bottom:0.1em solid hsl($grayLight-2);
+font-family:Popins,sans-serif;
+letter-spacing: 0.05em;
+}
+& >.input-wrapper{
+@include flx-row(center,center,1em);
+width:50%;
+&  > input{
+width:min(10em,35%);
+padding:0.5em;
+/* Chrome, Safari, Edge, Opera */
+&::-webkit-outer-spin-button,
+&::-webkit-inner-spin-button {
+  -webkit-appearance:auto;
+}
+/* Firefox */
+&[type=number] {
+  -moz-appearance: textfield;
+  appearance:auto;
+}
+}
+}
+}
+&:has(.input-wrapper){
+& input#product-manually,input#product-price{
+font: inherit;
+font-size: var(--fs-300);
+background-color: hsl($bkg);
+border: 4px solid hsl($grayLight-2);
+border: 0.1em solid hsl($mute-border-color);
+ border-radius:$_radius;
+ padding:$space-xs $space-sm;
+font-size:$fs-300; 
+@include squish-fast;
+&:focus{
+border:0.1em solid hsl($accent-turq);
+outline:0;
+box-shadow:0 0 0 0.1em hsl($bkg),
+0 0 0 0.2em hsl($accent-turq)
+;
+} 
+}
+}
+& > .msg-box{
+width: 100%;
+@include flx-row();
+& > button{
+ margin-left: auto;  
+}
+}
+}
+}
+& > .product-seller-container{
+ border:0.1em solid hsl($accent-turq);
+ border-radius:$_radius*3;
+ padding:0.3em 0.2em;
+width:min(15em,25vw);
+& > .products{
+  & > ul{
+ padding:0.3em 0.4em;
+  border-radius:$_radius*3;
+ background:linear-gradient(hsl($txt--dark),hsl($muted--light));
+ background:linear-gradient(hsl($accent-turq),hsl($accent-turq-light));
+  & > li{
+&:nth-child(odd){
+background-color:hsl($accent-turq-light);
+}
+&:nth-child(even){
+background-color:hsl($bkg);
+}
+width:100%;
+padding: 0.5em 0.3em;
+@include flx-row();
+& > span:first-child{
+margin-right: 0.4em;
+color:hsl($txt--dark);
+  font: {
+size:$fs-400;
+family:"Patrick Hand",sans-serif;
+  }
+letter-spacing: 0.05em;
+}
+&  form{
+margin-left:auto;
+}
+}
+}
+}
+}
+}

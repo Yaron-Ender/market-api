@@ -13,7 +13,7 @@ const Navbar = () => {
 const {user,dispatch,authIsReady}=useAuthContext();
 const {logout}=useLogout();
 const {deleteFromAuth}=usefirebaseAuth();
-const {deleteDocument}=useFirestore('users');
+const {deleteFewDocs}=useFirestore('users');
 const { deleteFromStorage }=usefirebaseStorage()
 const [rotateIcon,setRotateIcon]=useState(false)
 const [rotateFirst,setRotateFirst]=useState(false)
@@ -27,13 +27,13 @@ if(rotateFirst){
   setTimeout(()=>{setRotateIcon(false)},700) 
 }
 },[rotateFirst])
-//delete user
+//Delete user&docs from firestore & storage
 const deleteUser =async()=>{
   if (window.confirm("Delete user and all data?")){
 if(user.photoURL){
 await deleteFromStorage(user.photoURL)
 }
-await deleteDocument(user.uid);
+await deleteFewDocs(user.uid)
 await deleteFromAuth();
 dispatch({ type: "LOGOUT" });
 }  
@@ -67,7 +67,7 @@ return (
 
 <NavLink type='button'
 title='delete user'
-className='btn warning'
+className='btn btn-warning'
 onClick={deleteUser}
   >
 <span>Delete User</span>

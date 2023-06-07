@@ -9,8 +9,8 @@
   text-decoration: none;
   padding: 0.4em 1.4em;
   border-radius:$_radius;
-  box-shadow: 0.05em 0.1em 0.9em  hsl($accent--light),
-    0 0 0 -0.1em hsl($bg--light), 0 0 0 -0.2em hsl($accent--light);
+  // box-shadow: 0.05em 0.1em 0.9em  hsl($accent--light),
+  //   0 0 0 -0.1em hsl($bg--light), 0 0 0 -0.2em hsl($accent--light);
 transition:transform  $_tspeed_fast $_ttype_squish,
            background-color  $_tspeed_fast $_ttype_squish;
 &:where(svg, img, span) {
@@ -35,13 +35,18 @@ box-shadow:none;
 }
 &.btn-black{
 background-color: hsl($bg--dark);
-box-shadow:none;
+@include easeOut-fast;
 &:is(:hover){
  color:hsl($bg--dark);
+ border: 0.1em solid hsl($bg--dark);
  background-color:hsl($bkg); 
 font-weight: bold;  
 box-shadow: 0 0 0 0.2em hsl($bkg),
     0 0 0 0.3em hsl($bg--dark);
+}
+&:is(:active){
+transform: translateY(0.2em);
+@include squish-fast;
 }
 }
 &.btn-regestration{
@@ -57,6 +62,29 @@ box-shadow: 0.05em 0.1em 0.9em  hsl($grayLight-1),
 &:active{
 @include easeOut;
 transform: translateY(0.2em);
+}
+}
+&.btn-warning{
+font-size:$fs-200;
+background-color: hsl($warning);
+color:hsl($bkg);
+border:2px solid hsl($bkg);
+border-radius:$_radius*2;
+&:is(:active, :hover){
+ box-shadow:0 0 0 0.2rem hsl($bkg),
+    0 0 0 0.4em hsl($warning);
+}
+}
+&.btn-delete-product{
+font-size:$fs-200;
+padding:0.3em 0.6em;
+background-color: hsl($warning);
+color:hsl($bkg);
+border:0.2em solid hsl($bkg);
+border-radius:$_radius*2;
+&:is(:active, :hover){
+ box-shadow:0 0 0 0.1rem hsl($bkg),
+    0 0 0 0.2em hsl($warning);
 }
 }
 }

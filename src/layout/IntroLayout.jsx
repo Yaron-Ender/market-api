@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import {Outlet,Link,useLocation} from "react-router-dom";
 const IntroLayout = () => {
-// console.log(params)
-// console.log(searchParams.get('login'))
 const location = useLocation()
-console.log(location.pathname)
 const [mobile,setMobile]=useState(false);
 useEffect(()=>{
 if(window.innerWidth<520){
