@@ -1,10 +1,25 @@
 
 .seller-layout{
+& > h2{
+width:100%;
+text-align: center;
+}
  border:3px solid red;
  padding:1em;
  @include flx-col(center,flex-start); 
  overflow-x: hidden; 
+ & > .product-container{
+width:100%;
+@include grid-col(2fr 1fr,auto,1rem);
+background-color: aqua;
+@media screen and (max-width:740px) {
+  @include grid-col( 1fr,auto,1rem){
+  place-items: center;
+  };
+}
  & > .add-product-container{
+width:max(50vw,340px);
+align-self: flex-start;
 padding:2em 1em;
 border-radius:$_radius;
 box-shadow: 0.25em 0.3em 1em hsl($muted);
@@ -32,7 +47,7 @@ letter-spacing: 0.05em;
 @include flx-row(center,center,1em);
 width:50%;
 &  > input{
-width:min(10em,35%);
+width:min(5em,50%);
 padding:0.5em;
 /* Chrome, Safari, Edge, Opera */
 &::-webkit-outer-spin-button,
@@ -76,11 +91,12 @@ width: 100%;
 }
 }
 }
+/*PRODUCT CONTAINER*/
 & > .product-seller-container{
  border:0.1em solid hsl($accent-turq);
  border-radius:$_radius*3;
  padding:0.3em 0.2em;
-width:min(15em,25vw);
+width:max(23em,15vw);
 & > .products{
   & > ul{
  padding:0.3em 0.4em;
@@ -113,4 +129,5 @@ margin-left:auto;
 }
 }
 }
+ }
 }

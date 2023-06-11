@@ -5,7 +5,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import Select from "react-select";
 const AddproductForm = () => {
 const msg=useActionData()
-console.log(msg)
 const { sellerProducts } = useData();
 const { user }=useAuthContext();
 const [productManually,setProductManually]=useState('');
@@ -61,7 +60,7 @@ setMessage('')
 <input
 type="number"
 inputMode="decimal"
- step="0.01"
+ step="0.1"
 name="product-price"
 id="product-price"
 required
