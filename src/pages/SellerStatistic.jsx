@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDocument } from "../hooks/useDocument";
 import Select from "react-select";
 import { useData } from '../hooks/useData';
-import SellerStatisticResult from "./SellerStatisticResult";
+import SellerStatisticQuery from "./SellerStatisticQuery";
 
 const SellerStatistic = ({id}) => {
 const {document,error}=useDocument('products',id);
@@ -10,6 +10,25 @@ const { sellersRegion } = useData();
 const [options,setOptions]=useState([]);
 const [product,setProduct]=useState();
 const [districtState,setDistrictState]=useState('');
+const [productSelect,setProductSelect]=useState('');
+const [distSelect,setDistSelect]=useState('')
+const [disabel,setDisabel]=useState(true);
+const [showProd,setShowProd]=useState('');
+const [showDist,setShowDist] = useState('');
+const refProduct = useRef()
+const refDist = useRef()
+ const handleSubmit = (e)=>{
+e.preventDefault();
+if(productSelect&&distSelect){
+setDisabel(false);
+setProduct(productSelect);
+setDistrictState(distSelect)
+refProduct.current.selectOption('');
+refDist.current.selectOption('');
+setShowProd(productSelect);
+setShowDist(Object.fromEntries(distSelect).label);
+}
+}
 
 useEffect(()=>{
 if(document){
@@ -21,38 +40,57 @@ document.products.map((item) => optionsArr.push({value:item.product,label:item.p
 return prev = optionsArr
 })
 }
-},[document,setOptions])
+},[document])
  return (
-<div>
-<h3>statistic</h3>
+<div className="statistic-container">
+<h3>compare your prices with other sellers</h3>
 {error&&<h3>could not show data</h3>}
 <div className="select-box">
+<form onSubmit={(e)=>{handleSubmit(e)}}>
 <div className="choose-product-box">
+<span>Select Product</span>
 {options&& 
 <Select
 options={options}
 placeholder='Select Product'
-onChange={(option)=>setProduct(option.value)}
+onChange={(option)=>{setProductSelect(option.value)
+setShowProd('');
+setShowDist("");
+}}
+ref={refProduct}
 />
 }
 </div>
 <div className="choose-district-box">
+<span>Select District</span>
 <Select
 options={sellersRegion.concat({value:'',label:'All Districts'})}
 placeholder='Select District'
 // onBlur={}
-onChange={(option)=>{setDistrictState(Object.entries(option))}}
+onChange={(option)=>{
+setDistSelect(Object.entries(option))
+setShowDist('');
+setShowProd("");
+}}
+ref={refDist}
 />
-{product&&<h3>{product}</h3>}
 </div>
-<div className="result-container">
+<button className="btn" >compare</button>
+</form>
+<div className="show-choise-box">
+ {showProd&&<span>{showProd}</span>}
+ {showDist&&<span>{showDist}</span>}
+</div>
+</div>
+
+<div>
 {districtState&&product&&
-<SellerStatisticResult district={districtState} product={product} />
+<SellerStatisticQuery district={districtState}
+ product={product}
+ userId={id}
+ />
 }
-
 </div>
-</div>
-
 </div>
     );
 };

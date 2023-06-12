@@ -14,10 +14,12 @@ return (
 {user&&
 <ProductSeller id={user.uid} />
 }
-</div>
+<>
 {user&&
 <SellerStatistic id={user.uid} />
 }
+</>
+</div>
 <img src={wave}/>
 </div>
     );
