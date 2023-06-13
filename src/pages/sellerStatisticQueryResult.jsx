@@ -28,11 +28,7 @@ useEffect(()=>{
 if(arrayOfDocQuery){
   const x =async ()=>{
     const pricesArr2 = [];
-    // setAvg('');
-    // setMin('');
-    // setMax('');
-
-    //if one of district has been chosen
+//if one of district has been chosen
 if(arrayOfDocQuery.length>0){
 arrayOfDocQuery.forEach(async(id)=>{
 const document = await getDocument(id);
@@ -46,7 +42,6 @@ console.log(pricesArr2)
   setAvg((prev)=>{
   prev = pricesArr2.reduce((acc, curr) => {
     acc += curr;
-     console.log(acc);
     return acc
   }, 0);
   return (prev / pricesArr2.length).toFixed(2)
@@ -159,15 +154,6 @@ avarage price
     </div>
     </>
     }
-    
-{/* {  min!==max&&
-    <div className="text-box">
-      <span> {min} </span>
-      <span>{avg}</span>
-      <span> {max} </span>
-    </div>
-} */}
-
   </div>
 )}
 </div>

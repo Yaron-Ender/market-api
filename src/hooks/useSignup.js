@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { auth,db,storage } from "../firebase/firebaseConfig" 
+import { auth,db,storage,timestamp } from "../firebase/firebaseConfig" 
  import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
  import { doc,getDoc,setDoc } from "firebase/firestore";
  import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
@@ -38,7 +38,7 @@ setIsPending(false)
 const docReff =doc(db,'users',user.uid)
 const userDoc= await getDoc(docReff)
 if(!userDoc.exists()){
-setDoc(docReff, { displayName, id: user.uid, photoURL, phoneNumber, region,seller:true,online:true, }); 
+setDoc(docReff, { displayName, id: user.uid, photoURL, phoneNumber, region,seller:true,online:true,dateReistration:timestamp}); 
 dispatch({ type: "LOGIN", payload: {...user,phoneNumber,seller:true} });
 //create products document
 const docRefProduct = doc(db,'products',user.uid)

@@ -75,7 +75,7 @@ setShowProd("");
 ref={refDist}
 />
 </div>
-<button className="btn" >compare</button>
+<button className="btn btn-action" >compare</button>
 </form>
 <div className="show-choise-box">
  {showProd&&<span>{showProd}</span>}

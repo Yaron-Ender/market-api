@@ -49,6 +49,20 @@ transform: translateY(0.2em);
 @include squish-fast;
 }
 }
+&.btn-action{
+font-size:$fs-320;
+padding:0.1em 0.4em;
+color:hsl($txt--dark);
+background-color:hsl($bkg);
+font-weight:500;
+letter-spacing:0.07em;
+ border-radius:$_radius;
+ border:0.1em solid ;
+&:active{
+@include squish-fast;
+transform: translateY(0.2em); 
+}
+}
 &.btn-regestration{
 padding:0.7em 2.8em;
 font-size:$fs-400;

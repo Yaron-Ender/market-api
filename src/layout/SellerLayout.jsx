@@ -4,12 +4,16 @@ import ProductSeller from "../pages/ProductSeller";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useFirestore } from "../hooks/useFirestore";
 import SellerStatistic from "../pages/SellerStatistic";
+import AddSellerSpeach from "../pages/AddSellerSpeach";
 const SellerLayout = () => {
  const {user}=useAuthContext();
 return (
 <div className="seller-layout">
 <h2>let's build the oltimate busket product</h2>
 <div className="product-container">
+{user&&
+<AddSellerSpeach id={user.uid} />
+}
 <AddproductForm />
 {user&&
 <ProductSeller id={user.uid} />
@@ -26,7 +30,7 @@ return (
   };
   
   export default SellerLayout;
-  
+//ACTION
 export const sellerAction = async ({request})=>{
 const { updateDocuemt } = useFirestore("products");
 const { getDocument } = useFirestore('products')

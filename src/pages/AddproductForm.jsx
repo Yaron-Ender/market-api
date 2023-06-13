@@ -4,6 +4,7 @@ import { useData } from "../hooks/useData";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Select from "react-select";
 const AddproductForm = () => {
+//FORM ACTION
 const msg=useActionData()
 const { sellerProducts } = useData();
 const { user }=useAuthContext();
@@ -78,7 +79,7 @@ price (per Kg)
 <input type="hidden" name="product" value={(productManually)? productManually:optionFromSelect} />
 <div className="msg-box">
 {message&&<p>{message}</p>}
-<button type="submit" className="btn btn-black" >
+<button type="submit" className="btn btn-action" >
   Add Product  
 </button>
 </div>
