@@ -4,12 +4,12 @@ padding:0.7em 0.5em;
 width:100%;
 @include flx-col(center,flex-start);
 overflow: hidden;
+& > ul.menu-container{
 & > h3{
 span.accent{
 color:hsl($txt--dark);
 }
 }
-& > ul.menu-container{
 width:100%; 
 @include flx-row(space-between,center);
 & > a{
@@ -18,17 +18,7 @@ border: 2px solid hsl($accent--light);
 display:flex;
 place-content: center;
 place-items:center;
-// &.btn.btn-warning{
-// font-size:$fs-200;
-// background-color: hsl($warning);
-// color:hsl($bkg);
-// border:1px solid hsl($bkg);
-// border-radius:$_radius*2;
-// &:is(:active, :hover){
-//  box-shadow:0 0 0 0.2rem hsl($bkg),
-//     0 0 0 0.4em hsl($warning);
-// }
-// }
+
 & > span{
 margin-inline: 0.3em;
 }

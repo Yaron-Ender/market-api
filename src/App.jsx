@@ -14,6 +14,8 @@ import Error from './pages/Error';
 import NotFound from './pages/NotFound';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import BuyerShowSeller from './pages/BuyerShowSeller';
+import TransactionLayout from './layout/TransactionLayout';
 //useContext
 // import { useAuthContext } from './hooks/useAuthContext';
 //action & loader
@@ -42,13 +44,21 @@ const router = createBrowserRouter([
 {
 path:'/seller',
 element:<SellerLayout />,
-errorElement:<Error />,
 action:sellerAction,
 },
 {
-path:'buyer',
+path:'/buyer',
 element:<BuyerLayout />,
-errorElement:<Error />,
+children:[
+{
+path:':dist',
+element:<BuyerShowSeller />,
+},
+{
+path:'/buyer/:dist/:id',
+element:<TransactionLayout />
+}
+]
 },
 {
 path:'/logout',
@@ -62,7 +72,6 @@ path:'/logout',
 ]);
   return (
     <div>
-
   <>  
   <RouterProvider router={router} />
   <ToastContainer />

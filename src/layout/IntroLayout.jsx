@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
-import {Outlet,Link,useLocation} from "react-router-dom";
+import {Outlet,Link,useLocation} from 
+"react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 const IntroLayout = () => {
-const location = useLocation()
+const {user}=useAuthContext();
+const location = useLocation();
 const [mobile,setMobile]=useState(false);
 useEffect(()=>{
 if(window.innerWidth<520){
   setMobile(true)
 }
-},[])
+},[user])
+
   return (
-<div className="intro">
+<div className="intro"> 
 <div className="intro-text">
-<h2>the place when seller and buyer meet <span className="accent">directly</span> </h2>
+<h2>The place where seller meet buyers <span className="accent">directly</span> </h2>
 <h3>SIGN UP either as seller or buyer
 {!mobile&&<span>, or login with the button at the up right corner</span>}</h3>
 

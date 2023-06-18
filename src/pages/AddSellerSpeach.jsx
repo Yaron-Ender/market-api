@@ -1,6 +1,6 @@
 import { useFirestore } from "../hooks/useFirestore";
 const AddSellerSpeach = ({id}) => {
-const {updateDocuemt}=useFirestore('users');
+const {updateDocuemt}=useFirestore('products');
  const handelSubmit =async(e)=>{
 e.preventDefault()
 const text ={text:e.target.speach.value};

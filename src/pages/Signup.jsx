@@ -123,7 +123,6 @@ autoComplete="given-name"
 onChange={(e) => {
 setUsername(e.target.value);
 }}
-value={username}
 />
 <label htmlFor="displayName" className="form-label">
 User Name

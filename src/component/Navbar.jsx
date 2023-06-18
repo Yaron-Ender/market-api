@@ -65,6 +65,10 @@ return (
   <ArrowRightOnRectangleIcon width={20} />
 </NavLink>
 
+{user&&
+<h3>welcome back, <span className='accent'>{user.displayName}</span></h3>
+}
+
 <NavLink type='button'
 title='delete user'
 className='btn btn-warning'
@@ -77,9 +81,7 @@ onClick={deleteUser}
 } 
 </ul>
   }
-{user&&
-<h3>welcome back, <span className='accent'>{user.displayName}</span></h3>
-}
+
 </div>
     );
 };

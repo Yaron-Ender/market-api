@@ -9,7 +9,7 @@ const SellerLayout = () => {
  const {user}=useAuthContext();
 return (
 <div className="seller-layout">
-<h2>let's build the oltimate busket product</h2>
+<h2>Let's build the ultimate basket product</h2>
 <div className="product-container">
 {user&&
 <AddSellerSpeach id={user.uid} />

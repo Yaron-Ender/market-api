@@ -24,6 +24,7 @@
   /* gray */
   $grayLight-1:215 46% 93%;
    $grayLight-2:225 39% 85%;
+   
     /* Turqiuz */
   $accent-turq: 183 74% 44%;
    $accent-turq-light: 180 55% 90%;
@@ -80,6 +81,11 @@
 @mixin insetShadow{
 box-shadow:.2rem .2rem .1rem hsl($grayLight-2), 
 inset -.2rem -.2rem .5rem hsl($grayLight-2);
+};
+@mixin insetShadowFull{
+box-shadow:inset -.2rem -.2rem .5rem hsl($grayLight-2),
+        inset .2rem .2rem .3rem hsl($grayLight-1)
+;
 };
 //layout
 @mixin flx-row($jusfity:center,$align:center,$gap:0){

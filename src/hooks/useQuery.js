@@ -1,6 +1,6 @@
 import { useState,useEffect} from "react";
 import { db } from "../firebase/firebaseConfig";
-import { collection,query,where,onSnapshot,getDocs } from "firebase/firestore";
+import { collection,query,where,getDocs } from "firebase/firestore";
 
 export const useQuery = (_collection,field,value,dis)=>{
  const colRef = collection(db,_collection);
@@ -12,7 +12,12 @@ const [rerender,setRerender]=useState(false);
   useEffect(()=>{
   setRerender(dis)
   const x = async () => {
-  const queryDocs = await getDocs(q);
+  let queryDocs;
+  if(dis==='all'){
+    queryDocs = await getDocs(colRef);
+  }else{
+     queryDocs = await getDocs(q);
+  }
   const arr = [];
    queryDocs.forEach((_doc) => {
   if (!arr.includes(_doc.id)) {

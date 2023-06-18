@@ -1,9 +1,9 @@
 //sellers's region 
 export const useData =()=>{
     const sellersRegion = [
-   {value:'north',label:'north'},
-   {value:'center',label:'center'},
-   {value:'south',label:'south'},
+   {value:'North',label:'North'},
+   {value:'Center',label:'Center'},
+   {value:'South',label:'South'},
    ] 
 // sellers producrs
 const sellerProducts = [
