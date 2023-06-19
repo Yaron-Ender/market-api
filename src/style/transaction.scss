@@ -1,0 +1,11 @@
+//TRANSACTION
+.transaction{
+border:2px solid red;
+& > .transaction-seller-products{
+border:2px solid red;
+& > header{
+
+}
+    
+}
+}

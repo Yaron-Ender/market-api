@@ -5,6 +5,9 @@
        currency: "ILS",
       }).format(amn);
     };
+    const currencyToNum = ()=>{
+      
+    }
   return{formatCurrency}
  } 
 

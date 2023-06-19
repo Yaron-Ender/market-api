@@ -13,6 +13,11 @@ const sellerProducts = [
 {value:'Peach',label:'Peach'},
 {value:'Malon',label:'Malon'},
 {value:'Orange',label:'Orange'},
+{value:'Mango',label:'Mango'},
+{value:'Watermelon',label:'Watermelon'},
+{value:'Eggplant',label:'Eggplant'},
+{value:'Cucumber',label:'Cucumber'},
+{value:'Celery',label:'Celery'},
 ]
 //styl forSelect
 const regionSelect ={

@@ -1,6 +1,6 @@
 
 import { db } from "../firebase/firebaseConfig" 
-import { collection, deleteDoc, doc,getDoc,setDoc,updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc,getDoc,setDoc,updateDoc } from "firebase/firestore"
  export const useFirestore = (_collection)=>{
 const refCol = collection(db,_collection);
 //Delete Document 
@@ -48,6 +48,15 @@ const setDocument =async(id,value)=>{
    console.log(err.message);
  }  
 }
+//add document with add method
+const addDocument =async(value)=>{
+  console.log(value)
+try{
+await addDoc(refCol,value)
+}catch(err){
+console.log(err.message);
+}  
+}
 const updateOnlineOn =async (docID)=>{
 const docRef = doc(refCol, docID);
 try{
@@ -64,5 +73,5 @@ await updateDoc(docRef,{online:false})
 console.log(err.message)
 }
 }
-return {deleteDocument,deleteFewDocs,updateDocuemt,setDocument,getDocument,updateOnlineOn,updateOnlineOff}
+return {deleteDocument,deleteFewDocs,updateDocuemt,setDocument,addDocument,getDocument,updateOnlineOn,updateOnlineOff}
 }
