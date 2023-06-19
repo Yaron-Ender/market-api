@@ -75,7 +75,7 @@ setSellerDist(document.region);
 </div>
 {docUser&&
 <div className="avatar">
-<Avatar photo={docUser.photoURL} />
+<Avatar photo={docUser.photoURL} width={'4em'}  />
 </div>
 }
 {date&&

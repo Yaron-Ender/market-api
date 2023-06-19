@@ -42,6 +42,7 @@
   /* Dark Mode */
   $bg--dark:$_hue 15% 10%;
   $txt--dark:$_hue 45% 45%;
+  $txt--light:$_hue 75% 75%;
   $accent--dark:$_hue 50% 50%;
   $muted--dark:$_hue 20% 4%;
   /* utils */
@@ -119,4 +120,5 @@ grid-auto-flow: row;
 display: grid;
 grid-auto-flow:column;
 place-items:center;
+@content
 }
