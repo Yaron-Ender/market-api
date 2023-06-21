@@ -27,7 +27,7 @@ const document =await getDoc(docRef);
 if (document.exists()) {
  return document.data()
 } else {
-  console.log("document doesnt exixst");
+  console.log("document doesn't exixst");
 }
 }
 //update document

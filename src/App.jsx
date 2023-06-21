@@ -2,7 +2,7 @@
 import './app.scss'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 //react toastify
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //layouts
 import RootLayout from './layout/RootLayout';

@@ -8,7 +8,6 @@
 }
 }
 & >.orders-layout{
-border: 2px solid red;
 @include grid-col(1fr 2fr,1fr,1em);
 margin-top:0.8em;
 @media screen and (max-width:520px) {
@@ -60,22 +59,42 @@ width:90%;
 }
 // ORDER DETAILS
 & > .order-container{
-background-color:lightcyan;
-@include grid-col(1fr 1fr,1fr 1fr auto,0.2em 0.1em){
+// background-color:lightcyan;
+@include grid-col(1fr 1fr,1fr auto auto,0.2em 0.1em){
 justify-items: center;
 align-items: center;
 };
+@include insetShadow;
+@media screen and (max-width:740px) {
+ @include grid-col(1fr,1fr,0.2em){
+place-items:center;
+}
+}
 & > header{
+justify-self: flex-end;   
 width: max-content;
-padding:0.1em 0.5em;
-border-right:0.5em solid hsl($grayLight-1);
-background-color: aliceblue;
-
+margin-right:1em;
+@media screen and (max-width:740px){
+justify-self:center;    
+}
+& > h3{
+margin-bottom:0.5em;
+}
+& > h4{
+margin-bottom: 0.6em;
+}
 }
 & > .order-products{
-border:2px solid #222;
+border-left:0.3em solid  hsl($grayLight-1);
 width:max-content;
-padding:2em;
+padding-left:4em;
+justify-self: flex-start;
+@media screen and (max-width:740px){
+justify-self:center;
+border-left:0em solid hsl($grayLight-1);
+border-top:0.2em solid hsl($grayLight-1);
+border-bottom:0.2em solid hsl($grayLight-1);
+}
 & >ul{
 list-style-type:decimal;
 & > li{
@@ -85,22 +104,62 @@ padding:0.3em;
 }
 }
 & > .order-supplied{
- width:100%;
-@include flx-col();
-& > button{
-@include flx-row(space-between,center,0em);
-position: relative;
-width:60%;
-& > span{
-
-}
-&:after{
 width:100%;
-height:100%;
-top:0;
-left:0;
-content:'after you supplied the order, push this button ';
-display: none;
+grid-column:span 2;
+align-self: flex-start;
+margin-top:1em;
+@media screen and (max-width:740px) {
+grid-column:span 1;
+}
+& >.btn-box{
+width:100%;
+@include flx-row(center,center,0.3em 1em);
+& > button{
+width:50%;   
+}
+& >span:first-of-type{
+cursor: pointer;
+&:hover{
+transform:scale(1.1);
+}
+}
+& >span:last-child{
+width: 100%;
+max-height:0;
+visibility: hidden;
+font-size:$fs-300;
+color:hsl($bkg);
+padding: 0.5em 0.2em;
+background: no-repeat  0/10% linear-gradient(90deg ,rgba(0,0,0,0.9) ,rgba(0,0,0,0.5)) ;
+@include easeOut;
+transition-delay:all 1s;
+&.open-help{
+@include easeOut;
+background-size: 100%;   
+visibility:visible;
+max-height:100%;
+}
+}
+}
+}  
+& >.order-status{
+    align-self: flex-start;
+grid-column:span 2;
+ @media screen and (max-width:740px) {
+ grid-column:span 1;
+ border-top:0.2em solid hsl($grayLight-1);
+border-bottom:0.2em solid hsl($grayLight-1);
+margin-bottom:0.3em;
+ }
+& > h3{
+text-align:center;
+margin-bottom:0.3em;
+}
+& > p{
+ @include flx-row(space-around,center);
+font-size:$fs-300;
+& > span{
+margin-left: auto;
 }
 }
 }

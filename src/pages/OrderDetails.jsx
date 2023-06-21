@@ -1,17 +1,26 @@
+import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDocument } from "../hooks/useDocument";
-import { useEffect } from "react";
-import { QuestionMarkCircleIcon} from "@heroicons/react/24/solid";
+import { useFirestore } from "../hooks/useFirestore";
+import { QuestionMarkCircleIcon,CheckCircleIcon,MinusCircleIcon} from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
 const OrderDetails = () => {
 const {orderID} = useParams();
 const {document,error}=useDocument('orders',orderID)
+const { updateDocuemt } = useFirestore("orders");
+const [openHelp,setOpenHelp] = useState(false);
 
-useEffect(()=>{
-    if(document){
-     console.log(document.order)
- }   
-},[document])
-    return (
+const handleSubmit =async()=>{
+if(confirm('Did you supply the order to your cusotmer ?')){
+try{
+await updateDocuemt(orderID, { supplied: true });
+    return toast.success("you've sent your order");
+}catch(err){
+return toast.error("sorry , your order couldn't sent");
+}
+}
+}
+return (
  <div className="order-container">
 {document&&
 <>
@@ -34,9 +43,19 @@ useEffect(()=>{
 } 
 </div>
 <div className="order-supplied">
-<button>supply order <span><QuestionMarkCircleIcon width={22} /></span></button>
-<p>Order Status - <span>{(document.order.supplied)?'ORDER SUPPLY':'ORDER DID NOT SULLY'}</span></p>
-<p>Confirmation Status - <span>{(document.order.confirmOrder)?'ORDER CONFIRM BY THE CUSTOMER':'ORDER DID NOT CONFIRM BY THE CUSTOMER'}</span></p>
+<div className="btn-box">
+<button onClick={handleSubmit} className="btn btn-supply"  
+disabled={document.supplied} >
+{(document.supplied)?'order was supplied':' supply order'}
+   </button>
+ <span onClick={()=>{setOpenHelp(prev=>!prev)}}><QuestionMarkCircleIcon width={22} /></span>
+<span className={`${(openHelp)?'open-help':''}`}>push this button after you supplied the order, after the order will be confirmed by the buyer you will get indecation in the status box. </span>
+</div>
+</div>
+<div className="order-status">
+<h3>Order's Status</h3>
+<p>Order's Status - <span>{(document.supplied)?<CheckCircleIcon width={30} style={{color:'green'}} />:<MinusCircleIcon width={30} style={{color:'red'}} />}</span></p>
+<p>Confirmation's Status - <span>{(document.confirmOrder)?<CheckCircleIcon width={30} style={{color:'green'}} />:<MinusCircleIcon width={30} style={{color:'red'}} />}</span></p>
 </div>
 </>
 }

@@ -101,5 +101,29 @@ border-radius:$_radius*2;
     0 0 0 0.2em hsl($warning);
 }
 }
+&.btn-supply{
+&:not(:disabled){
+font-size:$fs-320;
+border-radius:$_radius*2;
+background-color:hsl($supply);
+@include easeOut-fast;
+&:is(:active, :hover) {
+  background-color:hsl($supply-hover) ;
+  box-shadow:0 0 0 0.2rem hsl($bkg),
+    0 0 0 0.3em hsl($supply-hover)
+    ;
+}
+&:is(:active){
+transform: translateY(0.2em);  
+}
+}
+&:disabled{
+font-size:$fs-300;
+border-radius:$_radius*2;
+background-color:$supply-disabled;
+color: #222;
+cursor: auto;
+}
+}
 }
 

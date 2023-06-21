@@ -1,5 +1,5 @@
 import { db } from "../firebase/firebaseConfig";
-import { collection, query, where, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, query, where,orderBy,onSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 export const useQueryOrders = (_collection,_queryArr)=>{
     const [arrayOfOrders,setArrayOfOrders]=useState([]);
@@ -7,7 +7,7 @@ export const useQueryOrders = (_collection,_queryArr)=>{
     const _query = useRef(_queryArr).current
 useEffect(()=>{
 const colRef = collection(db, _collection);
-const q = query(colRef,where(..._query))
+const q = query(colRef,where(..._query),orderBy("createdAt","desc"))
 const unsub = onSnapshot(q,(snapshot)=>{
 let result = [];
 snapshot.docs.forEach((sub)=>{
