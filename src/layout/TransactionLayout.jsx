@@ -4,11 +4,12 @@ import { useDocument } from "../hooks/useDocument";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useHelper } from "../hooks/useHelper";
 import { useFirestore } from "../hooks/useFirestore";
+import { timestamp } from "../firebase/firebaseConfig";
 import Avatar from "../component/Avatar";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
 const TransactionLayout = () => {
-    const {id}=useParams();
+ const {id}=useParams();
 const {document,error} = useDocument('products',id)
 const { document: docSeller, error: errorUser } = useDocument("users",id);
 const { user }=useAuthContext();
@@ -87,7 +88,7 @@ if(!totalPrice){
   return
 }
 if(confirm('Send Order?')){
-  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email });
+  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supllied:false,confirmOrder:false,createdAt:timestamp });
 }
 }
 return (
@@ -105,6 +106,11 @@ return (
 <div className="details">
 <span>Phone number - {docSeller.phoneNumber}</span>
 {user&&<span>Email: {docSeller.email}</span>}
+</div>
+}
+{document&&document.text&&
+<div className="speach">
+<p>{document.text}</p>
 </div>
 }
 </header>

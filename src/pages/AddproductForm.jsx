@@ -18,8 +18,8 @@ setMessage(msg)
 },[msg])
 return (
 <div className="add-product-container">
+<h3>Add products</h3>
 <Form method="post" className="form">
-
  {/*upper container  */}
  <div className="upper-container">
 {/* Select */}

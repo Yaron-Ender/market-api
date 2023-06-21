@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AddproductForm from "../pages/AddproductForm";
 import wave from '../assets/wave.svg'
 import ProductSeller from "../pages/ProductSeller";
@@ -5,24 +6,41 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useFirestore } from "../hooks/useFirestore";
 import SellerStatistic from "../pages/SellerStatistic";
 import AddSellerSpeach from "../pages/AddSellerSpeach";
+import SellerSidebar from "../pages/SellerSidebar";
 const SellerLayout = () => {
- const {user}=useAuthContext();
+const {user}=useAuthContext();
+const [openstatistic, setOpenStatistic] = useState(false);
+const [openSpeach, setOpenSpeach] = useState(false);
+const sidebarActions =(action)=>{
+switch(action){
+case 'statistic':
+setOpenStatistic((prev)=>(!prev))
+break;
+case 'speach':
+setOpenSpeach((prev)=>(!prev))
+break;
+default:
+break;
+}
+}
 return (
 <div className="seller-layout">
-<h2>Let's build the ultimate basket product</h2>
+<h3>Let's build the ultimate basket product</h3>
 <div className="product-container">
-{user&&
+{user&&openSpeach&&
 <AddSellerSpeach id={user.uid} />
+}
+{user&&
+<SellerSidebar sidebarActions={sidebarActions} />
 }
 <AddproductForm />
 {user&&
 <ProductSeller id={user.uid} />
 }
-<>
-{user&&
+{user&&openstatistic&&
 <SellerStatistic id={user.uid} />
 }
-</>
+
 </div>
 <img src={wave}/>
 </div>

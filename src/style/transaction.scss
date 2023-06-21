@@ -33,6 +33,12 @@ color:hsl($txt--dark);
 letter-spacing:0.05em;
 opacity:0.6;
 }
+& > .speach{
+width:100%;
+text-align:center;
+letter-spacing:0.15em;
+font-size: $fs-300;
+}
 }//END OF HEADER
 & > .transaction-container{
 color:hsl($txt--dark);
