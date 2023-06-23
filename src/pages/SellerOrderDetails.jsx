@@ -1,15 +1,24 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useDocument } from "../hooks/useDocument";
 import { useFirestore } from "../hooks/useFirestore";
 import { QuestionMarkCircleIcon,CheckCircleIcon,MinusCircleIcon} from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
 const SellerOrderDetails = () => {
 const {orderID} = useParams();
+const navigate =useNavigate()
 const {document,error}=useDocument('orders',orderID)
-const { updateDocuemt } = useFirestore("orders");
+const { updateDocuemt,deleteDocument } = useFirestore("orders");
 const [openHelp,setOpenHelp] = useState(false);
-
+//DELETE ORDER
+const deleteOrder =async()=>{
+if(window.confirm('Do you sure you want to delete the order?')){
+  navigate('/seller')
+await deleteDocument(orderID)
+   return toast.success("you've delete the order successfully");
+}
+}
+//SUPPLIED ORDER
 const handleSubmit =async()=>{
 if(confirm('Did you supply the order to your cusotmer ?')){
 try{
@@ -49,13 +58,16 @@ disabled={document.supplied} >
 {(document.supplied)?'order was supplied':' supply order'}
    </button>
  <span onClick={()=>{setOpenHelp(prev=>!prev)}}><QuestionMarkCircleIcon width={22} /></span>
-<span className={`${(openHelp)?'open-help':''}`}>push this button after you supplied the order, after the order will be confirmed by the buyer you will get indecation in the status box. </span>
+<span className={`${(openHelp)?'open-help':''}`}>push this button after you supplied the order, after the order will be confirmed by the buyer you will get indecation in the status box.after the order will be confirmed you will be abel to delet the order</span>
 </div>
 </div>
 <div className="order-status">
 <h3>Order's Status</h3>
-<p>Order's Status - <span>{(document.supplied)?<CheckCircleIcon width={30} style={{color:'green'}} />:<MinusCircleIcon width={30} style={{color:'red'}} />}</span></p>
-<p>Confirmation's Status - <span>{(document.confirmOrder)?<CheckCircleIcon width={30} style={{color:'green'}} />:<MinusCircleIcon width={30} style={{color:'red'}} />}</span></p>
+<p>supply Status - <span>{(document.supplied)?<CheckCircleIcon width={30} style={{color:'green'}} />:<MinusCircleIcon width={30} style={{color:'red'}} />}</span></p>
+<p>Order confirmed by customer - <span>{(document.confirmOrder)?<CheckCircleIcon width={30} style={{color:'green'}} />:<MinusCircleIcon width={30} style={{color:'red'}} />}</span></p>
+{document.supplied&&document.confirmOrder&&
+<button onClick={deleteOrder} className="btn btn-warning">Delete Order</button>
+}
 </div>
 </>
 }

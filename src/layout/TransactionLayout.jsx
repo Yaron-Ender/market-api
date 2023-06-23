@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom"; 
+import { useParams,useNavigate } from "react-router-dom"; 
 import { useDocument } from "../hooks/useDocument";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useHelper } from "../hooks/useHelper";
@@ -8,8 +8,10 @@ import { timestamp } from "../firebase/firebaseConfig";
 import Avatar from "../component/Avatar";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { TrashIcon } from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
 const TransactionLayout = () => {
  const {id}=useParams();
+ const navigate = useNavigate()
 const {document,error} = useDocument('products',id)
 const { document: docSeller, error: errorUser } = useDocument("users",id);
 const { user }=useAuthContext();
@@ -89,8 +91,14 @@ if(!totalPrice){
   setMsg('Your product\'s basket is empty')
   return
 }
+if(basketArr.find(obj=>obj.coast===0)){
+    setMsg("Please inset amount in all the products");
+    return;
+}
 if(confirm('Send Order?')){
-  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supplied:false,confirmOrder:false,createdAt:timestamp });
+  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supplied:false,confirmOrder:false,createdAt:timestamp,orderRanked:0 });
+  navigate('/buyer/orders')
+     return toast.success("you've sent your order successfully");
 }
 }
 return (

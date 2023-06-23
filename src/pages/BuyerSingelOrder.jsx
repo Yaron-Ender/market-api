@@ -31,8 +31,7 @@ setAnimateBtn(false)
 //CONFIRM CHECKBOX
 const handleCheckbox =async(e)=>{
 if(window.confirm('Do you want to confirm this order?')){
-    await updateDocuemt(order.docID, { confirmOrder: true });
-    
+await updateDocuemt(order.docID, { confirmOrder: true });
 }else{
  refInput.current.checked=false
 }
@@ -63,9 +62,10 @@ return (
 <div className="msg-box">
 <span>Confirm Order</span>
 <QuestionMarkCircleIcon width={20} className="question-mark" onClick={()=>{setOpenMsg(prev=>!prev)}}  />
-<p className={`${openMsg?'open-msg':''}`}>Please confirm the order when you get it, then you could rank the seller</p>
+<p className={`${openMsg?'open-msg':''}`}>After the seller will send your order, you will be able to confirm the order, after confarmation you will be able to rank the seller</p>
 
 </div>
+{order.supplied&&
 <div className="checkbox-box">
 <label htmlFor="confirm">
 {order.confirmOrder?'Order Confirmed':'Confirm'}
@@ -78,7 +78,9 @@ onChange={handleCheckbox}
 disabled={order.confirmOrder}
 ref={refInput}
 />
-</div>
+</div>}
+{!order.supplied&&
+<p className="supply-msg">the seller didn't send your products yet</p>}
 </div>
 {order.confirmOrder&&
 <div className="rank-container">

@@ -68,8 +68,13 @@ margin-bottom: 1em;
 }
 }
 }
+& >.supply-msg{
+padding: 0.5em;
+font-size:$fs-300;
+text-align: center;
+}
 & > .checkbox-box{
- width: 100%;  
+ width: 100%;
 @include flx-row(center,center,2em);
 margin-bottom: 0.6em;
 & input[type='checkbox']{

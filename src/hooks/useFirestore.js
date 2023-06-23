@@ -50,7 +50,6 @@ const setDocument =async(id,value)=>{
 }
 //add document with add method
 const addDocument =async(value)=>{
-console.log(value)
 try{
 await addDoc(refCol,value)
 }catch(err){
