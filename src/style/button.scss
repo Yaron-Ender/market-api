@@ -9,8 +9,6 @@
   text-decoration: none;
   padding: 0.4em 1.4em;
   border-radius:$_radius;
-  // box-shadow: 0.05em 0.1em 0.9em  hsl($accent--light),
-  //   0 0 0 -0.1em hsl($bg--light), 0 0 0 -0.2em hsl($accent--light);
 transition:transform  $_tspeed_fast $_ttype_squish,
            background-color  $_tspeed_fast $_ttype_squish;
 &:where(svg, img, span) {
@@ -123,6 +121,17 @@ border-radius:$_radius*2;
 background-color:$supply-disabled;
 color: #222;
 cursor: auto;
+}
+}
+&.btn-my-order{
+color:hsl($bkg);
+background-color:hsl($txt--dark);
+padding: 0.3em 0.4em;
+border-radius:$_radius*2;
+@include easeOut-fast;
+&:hover{
+color:hsl($txt--dark);
+background-color:hsl($bkg);
 }
 }
 }

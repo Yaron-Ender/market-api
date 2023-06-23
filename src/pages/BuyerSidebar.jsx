@@ -3,6 +3,7 @@ const BuyerSidebar = () => {
 
 return (
 <div className="buyer-sidebar">
+
 <div className="shadow"></div>
 <ul>
 <NavLink to="North">North</NavLink>

@@ -3,21 +3,23 @@
 & > header{
 color: hsl($txt--dark);
 letter-spacing: 0.2em;
+& >h2{
 font: {
 family:Poppins,sans-serif;
+size:calc($fs-400 * 1.5);
 };
+}
 }
  & > .buyer-pannel{
  max-width:75vw;
  margin-inline: auto;
- @include flx-col();
+ @include flx-row(center,center,2em);
 @media screen and (max-width:740px){
  max-width:100vw;
     }
  & > .buyer-sidebar{
     width:max-content;
     position: relative;
-    
     & > ul{
    margin-inline: auto;
 border-radius: $_radius*2;
@@ -73,11 +75,9 @@ z-index: -2;
 //SELLER GRID
 & > .buyer-show-sellers-container{
 width: 100%;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(15em,0.3fr));
-gap:3em 1.5em;
-justify-content: center;
-
+@include grid-col(repeat(auto-fit,minmax(15em,0.3fr)),1fr,3em 1.5em){
+ justify-content: center;  
+};
 & > h3{
 grid-column: span 3;
 }
@@ -131,16 +131,15 @@ white-space: nowrap;
 text-overflow: ellipsis;
 }
 & > a{
-// display:inline-block;
 width:80%;
 text-align: center;
 padding:0.3em;
 margin-inline:auto;
 @include easeOut;
 &:hover{
-   box-shadow:0.5em 0.1em 10em  rgba(0,0,0,0.4);
-   border: 0;
-transform:scale(1.2) skew(10deg);
+   box-shadow:.2rem .2rem .1rem hsl($grayLight-2),
+   inset -.2rem -.2rem .5rem hsl($grayLight-2),0.5em 0.1em 1em  rgba(0,0,0,0.4);
+transform:scale(1.2) skew(2deg);
 
 };
 }

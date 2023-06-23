@@ -17,12 +17,10 @@ import Login from './pages/Login';
 import BuyerShowSeller from './pages/BuyerShowSeller';
 import TransactionLayout from './layout/TransactionLayout';
 import SellerOrders from './pages/SellerOrders';
-import OrderDetails from './pages/OrderDetails';
-//useContext
-// import { useAuthContext } from './hooks/useAuthContext';
+import SellerOrderDetails from './pages/SellerOrderDetails';
+import BuyerOrders from './pages/BuyerOrders';
 //action & loader
 function App() {
-// const { user } = useAuthContext();
 const router = createBrowserRouter([
 {
   path: "/",
@@ -32,15 +30,15 @@ const router = createBrowserRouter([
    path:'/',
   element:<IntroLayout />,
   errorElement: <Error />,
-    children:[
-    {
-    path:'signup',
-    element:<Signup />
-    },
-    {
-    path:'login',
-    element:<Login />
-    },
+  children:[
+  {
+  path:'signup',
+  element:<Signup />
+  },
+  {
+  path:'login',
+  element:<Login />
+  },
   ]
 },
 {
@@ -54,7 +52,7 @@ action:sellerAction,
   children:[
   {
   path:':orderID',
-  element:<OrderDetails />
+  element:<SellerOrderDetails />
   }
   ]
 },
@@ -62,6 +60,10 @@ action:sellerAction,
 path:'/buyer',
 element:<BuyerLayout />,
 children:[
+{
+path:'/buyer/orders',
+element:<BuyerOrders />
+},
 {
 path:':dist',
 element:<BuyerShowSeller />,

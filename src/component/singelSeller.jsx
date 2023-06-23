@@ -23,7 +23,7 @@ if(document.products){
 setSellerProducts(document.products);
 }
 
-setRank(document.rank);
+setRank(docUser.rank);
 setDate(format(new Date(document.rgistraionDate), "dd-MM-yyyy"));
 setSellerDist(document.region);
 }

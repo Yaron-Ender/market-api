@@ -21,18 +21,20 @@ const [totalPrice,setTotalPrice] = useState(0);
 const [prodChosen,setProductChosen]=useState(false);
 
 const fillBasket = (e)=>{
-  const val  = e.target.value
-  const obj = document.products.find(ob=>ob.product===val)
-  setBasketArr((prev)=>{
+if(e.target.nodeName!=='svg'&&e.target.nodeName!=='path'){
+const val  = e.target.value
+const obj = document.products.find(ob=>ob.product===val)
+setBasketArr((prev)=>{
 if(!prev.find(prevObj=>prevObj.product===obj.product)){
-  prev = [...prev,{...obj,coast:0}]
-  setMsg('');
-  // setProductChosen(false)
+prev = [...prev,{...obj,coast:0}]
+setMsg('');
+// setProductChosen(false)
 }else{
-  // setProductChosen(true)
- }
- return prev
+// setProductChosen(true)
+}
+return prev
 })
+}
 }
 //CALCULATE TOTAL PRICE
 const calcTotalPrice = ()=>{
@@ -88,7 +90,7 @@ if(!totalPrice){
   return
 }
 if(confirm('Send Order?')){
-  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supllied:false,confirmOrder:false,createdAt:timestamp });
+  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supplied:false,confirmOrder:false,createdAt:timestamp });
 }
 }
 return (

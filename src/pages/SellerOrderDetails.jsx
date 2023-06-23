@@ -1,10 +1,10 @@
-import { useEffect,useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDocument } from "../hooks/useDocument";
 import { useFirestore } from "../hooks/useFirestore";
 import { QuestionMarkCircleIcon,CheckCircleIcon,MinusCircleIcon} from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
-const OrderDetails = () => {
+const SellerOrderDetails = () => {
 const {orderID} = useParams();
 const {document,error}=useDocument('orders',orderID)
 const { updateDocuemt } = useFirestore("orders");
@@ -63,4 +63,4 @@ disabled={document.supplied} >
     );
 };
 
-export default OrderDetails;
+export default SellerOrderDetails;

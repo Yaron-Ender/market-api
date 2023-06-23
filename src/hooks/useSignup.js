@@ -38,13 +38,13 @@ setIsPending(false)
 const docReff =doc(db,'users',user.uid)
 const userDoc= await getDoc(docReff)
 if(!userDoc.exists()){
-setDoc(docReff, { displayName,email, id: user.uid, photoURL, phoneNumber, region,seller:true,online:true}); 
+setDoc(docReff, { displayName,email, id: user.uid, photoURL, phoneNumber, region,seller:true,online:true,rank:0}); 
 dispatch({ type: "LOGIN", payload: {...user,phoneNumber,seller:true} });
 //create products document
 const docRefProduct = doc(db,'products',user.uid)
 const productsDoc =await getDoc(docRefProduct)
 if(!productsDoc.exists()){
- setDoc(docRefProduct,{id:user.uid,region,products:[],rgistraionDate:user.metadata.creationTime,rank:0,displayName})
+ setDoc(docRefProduct,{id:user.uid,region,products:[],rgistraionDate:user.metadata.creationTime,displayName})
 }
 navigate('/seller')
 }

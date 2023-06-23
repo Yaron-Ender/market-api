@@ -1,0 +1,127 @@
+.buyer-orders{
+width:100%;
+& >.buyer-orders-container{
+& >h3{
+color:hsl($txt--dark);
+margin-bottom:1em;
+}
+& >ul{
+@include grid-col(repeat(auto-fit,minmax(15em,0.5fr)),1fr,3em 1.5em){
+ justify-content: center;
+
+};
+&  .singel-order-container{
+@include flx-col(flex-start,center);
+@include insetShadow;
+align-self: flex-start;
+& h4:first-of-type{
+margin-bottom:0.3em;
+}
+& > .order-details{
+width:100%;
+@include flx-col(center,center,0.1em);
+border-bottom:0.3em solid hsl($grayLight-1);
+padding: 0.2em;
+}
+& >.seller-details{
+width:100%;
+@include flx-col(center,center,0.1em);
+border-bottom:0.3em solid hsl($grayLight-1);
+padding: 0.2em;
+
+}
+& >.order-product{
+ width:100%;
+@include flx-col(center,center,0.1em);
+border-bottom:0.3em solid hsl($grayLight-1);
+padding: 0.2em;
+
+}
+& >.confirm-container{
+@include flx-col(center,center,0em);
+& >.msg-box{
+@include flx-row(center,center,1em);
+& >.question-mark{
+@include easeOut;
+cursor: pointer;
+ &:hover{
+transform:scale(1.1);
+ }   
+}
+& > p{
+width: 100%;
+max-height:0;
+text-align:center;
+visibility: hidden;
+font-size:$fs-300;
+color:hsl($bkg);
+padding: 0.1em 0.2em;
+background: no-repeat  0/0% linear-gradient(90deg ,rgba(0,0,0,0.9) ,rgba(0,0,0,0.5)) ;
+@include easeOut;
+transition-delay:all 1s;
+&.open-msg{
+ @include easeOut;
+background-size: 100%;   
+visibility:visible;
+max-height:100%;  
+margin-bottom: 1em; 
+}
+}
+}
+& > .checkbox-box{
+ width: 100%;  
+@include flx-row(center,center,2em);
+margin-bottom: 0.6em;
+& input[type='checkbox']{
+cursor: pointer;
+width:max-content;
+appearance: none;
+width:1em;
+height:1em;
+border-radius: 50%;
+outline: 30px;
+outline:0.2rem solid hsl($supply);
+outline-offset:0.3rem;
+&:checked{
+background-color:hsl($supply);
+}
+&:disabled{
+opacity: 0.5;
+background-color:hsl($supply);
+outline-color:hsl($grayLight-2);
+cursor: auto;
+}
+}
+}
+}
+& > .rank-container{
+width: 100%;
+@include flx-col();
+& > .rank-seller{
+@include flx-row();
+& > button{
+position: relative;
+cursor: pointer;
+background-color:transparent;
+& > img{
+position: absolute;
+top:50;
+left:50;
+transform: translate(-50% ,-50%);
+}
+&:active.animate{
+transform:translateY(0.5em) rotate(10deg);
+}
+
+}
+}
+& >p{
+font-size:$fs-400;
+padding: 0.3em ;
+
+}
+}
+}
+}
+}
+}
