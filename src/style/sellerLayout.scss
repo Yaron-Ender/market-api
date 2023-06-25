@@ -1,5 +1,8 @@
 
 .seller-layout{
+@include flx-col(center,flex-start);
+padding:1em;
+overflow-x: hidden; 
 & > h3{
 width:100%;
 color: hsl($txt--dark);
@@ -8,16 +11,28 @@ font: {
 family:Poppins,sans-serif;
 };
 }
- padding:1em;
- @include flx-col(center,flex-start);
- overflow-x: hidden; 
+& > .rank-container{
+width:100%;
+@include flx-row(flex-start,center);
+& >.rank-box{
+@include flx-row(center,center,1em);
+& > h4{
+& >span{
+color:hsl($txt--dark)
+}
+}
+& > p{
+ font-size:$fs-300;
+}
+}
+}
  & > .product-container{
 width:100%;
 @include grid-col( repeat(2,auto),auto,1em 0);
 @media screen and (max-width:740px) {
-  @include grid-col( 1fr,auto,1rem){
-  justify-content: center
-  };
+@include grid-col( 1fr,auto,1rem){
+justify-content: center
+};
 }
 & > .sellerSidebar{
 width:max(20em,25vw);

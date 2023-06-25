@@ -7,8 +7,11 @@ import { useFirestore } from "../hooks/useFirestore";
 import SellerStatistic from "../pages/SellerStatistic";
 import AddSellerSpeach from "../pages/AddSellerSpeach";
 import SellerSidebar from "../pages/SellerSidebar";
+import SellerRank from "../component/SellerRank";
+import { useQueryRanks } from "../hooks/useQueryRanks";
 const SellerLayout = () => {
 const {user}=useAuthContext();
+const { arrayOfRanks, error } = useQueryRanks("users");
 const [openstatistic, setOpenStatistic] = useState(false);
 const [openSpeach, setOpenSpeach] = useState(false);
 const sidebarActions =(action)=>{
@@ -26,12 +29,15 @@ break;
 return (
 <div className="seller-layout">
 <h3>Let's build the ultimate basket product</h3>
+{user&&arrayOfRanks&&
+<SellerRank sellerID={user.uid} arrayOfRanks={arrayOfRanks} />
+}
 <div className="product-container">
 {user&&openSpeach&&
 <AddSellerSpeach id={user.uid} />
 }
 {user&&
-<SellerSidebar sidebarActions={sidebarActions} />
+<SellerSidebar sidebarActions={sidebarActions} userID={user.uid} />
 }
 <AddproductForm />
 {user&&
