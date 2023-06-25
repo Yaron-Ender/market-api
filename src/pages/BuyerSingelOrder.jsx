@@ -18,7 +18,6 @@ const heartArray = [heartLevel1,heartLevel2,heartLevel3,heartLevel4];
 const updateRank = async()=>{
 // the buyer can update every seller 3 time per order
 if(order.orderRanked<3){
-console.log(order.orderRanked)
 // heart img/btn animation
 setAnimateBtn(true)
 //update seller rank in users collection
