@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useDocument } from "../hooks/useDocument";
-import { QuestionMarkCircleIcon} from "@heroicons/react/24/solid";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import { useFirestore } from "../hooks/useFirestore"; 
 import heartLevel4 from "../assets/heartLevel4.svg";
 import heartLevel3 from '../assets/heartLevel3.svg'
@@ -11,19 +11,24 @@ const {document,error}=useDocument('users',(order)?order.sellerID:'');
 const { updateDocuemt } = useFirestore("orders");
 const { updateDocuemt:updateDocumentUser } = useFirestore("users");
 const [openMsg,setOpenMsg]=useState(false);
-const [animateBtn,setAnimateBtn]=useState(false);
+const [animateBtn,setAnimateBtn]=useState(true);
 const refInput = useRef()
 const heartArray = [heartLevel1,heartLevel2,heartLevel3,heartLevel4];
 //UPDATE SELLER RANK
 const updateRank = async()=>{
-// the buyer an update every seller 3 time per order
+// the buyer can update every seller 3 time per order
 if(order.orderRanked<3){
+console.log(order.orderRanked)
 // heart img/btn animation
 setAnimateBtn(true)
 //update seller rank in users collection
 await updateDocumentUser(document.id,{rank:document.rank + 1})
 //update in products collection the 
 await updateDocuemt(order.docID,{orderRanked:order.orderRanked + 1 });
+//stop heart aniamtion after 3 clicks
+if(order.orderRanked===2){
+setAnimateBtn(false)
+}
 }else{
 setAnimateBtn(false)
 }
