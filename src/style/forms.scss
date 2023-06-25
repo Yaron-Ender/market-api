@@ -95,15 +95,6 @@ transform: translate3d(0,-1.2em,0);
 background-color:hsl($bkg) ;
 color:hsl($accent--light);
 }
-&  .err-msg{
-width: 98%;
-margin-inline:auto;
-border-radius: $_radius;
- color:crimson;
- font-weight: bold;
-background-color:hsl( $muted--light-op-2);
-padding:0.1em 0;
-}
 }
 &:has(#password:is(:valid)) small{
 transform: translateY(-1em);
@@ -132,6 +123,15 @@ cursor: pointer;
 }
 & > .btn{
 margin-inline:auto;
+}
+&  .err-msg{
+width: 98%;
+margin-inline:auto;
+border-radius: $_radius;
+ color:crimson;
+ font-weight: bold;
+background-color:hsl( $muted--light-op-2);
+padding:0.1em 0;
 }
 }
 }
