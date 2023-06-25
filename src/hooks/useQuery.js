@@ -8,7 +8,6 @@ export const useQuery = (_collection,field,value,dis)=>{
  const [arrayOfDocQuery,setArrayOfDocQuery] = useState([]);
 const [error, setError] = useState(null); 
 const [rerender,setRerender]=useState(false);
-
   useEffect(()=>{
   setRerender(dis)
   const x = async () => {

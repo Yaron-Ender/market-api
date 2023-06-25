@@ -24,17 +24,24 @@ useEffect(()=>{
     setUserPrice(price)
   }   
 },[document,product]) 
+
 useEffect(()=>{
 if(arrayOfDocQuery){
   const x =async ()=>{
     const pricesArr2 = [];
 //if one of district has been chosen
 if(arrayOfDocQuery.length>0){
+//if we chose region that is not the seller region we have know it in order to add it to the avg calculation
+if(arrayOfDocQuery.find(id=>id!==document.id)){
+console.log('not the same region')
+pricesArr2.push(userPrice[0]);
+}
 arrayOfDocQuery.forEach(async(id)=>{
 const document = await getDocument(id);
 const extractPrice = document.products
 .filter((obj) => obj.product === product)
 .map((obj) => +obj.amount);
+console.log(extractPrice)
 pricesArr2.push(...extractPrice);
 setMin(Math.min(...pricesArr2))
 setMax(Math.max(...pricesArr2))
@@ -128,17 +135,17 @@ avarage price
   }
 
 <div className="avg">
-  {avg && avg !== "NaN" && !solo && <span>AVG {formatCurrency(avg)}</span>}
+  {avg && avg !== "NaN" && !solo && <span>The AVG price is {formatCurrency(avg)}</span>}
 </div>
+{/* PROGRESS BAR */}
 {!solo && min != "Infinity" && max != "Infinity" && (
   <div className="progress-container">
     {min !== max &&
     <>
     <progress max={max}  value={Number(userPrice[0]).toFixed(2)}></progress>
    <div className="text-box">
-      <span> {min} </span>
-      <span>{avg}</span>
-      <span> {max} </span>
+      <span> {formatCurrency(0)} </span>
+      <span>highest price  {formatCurrency(max)} </span>
     </div>
   </>
     }
