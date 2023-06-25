@@ -38,7 +38,6 @@ const extractPrice = document.products
 pricesArr2.push(...extractPrice);
 setMin(Math.min(...pricesArr2))
 setMax(Math.max(...pricesArr2))
-console.log(pricesArr2)
   setAvg((prev)=>{
   prev = pricesArr2.reduce((acc, curr) => {
     acc += curr;

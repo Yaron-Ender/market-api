@@ -21,7 +21,7 @@ const [rerender,setRerender]=useState(false);
   const arr = [];
    queryDocs.forEach((_doc) => {
   if (!arr.includes(_doc.id)) {
-    arr.push(_doc.id);
+  arr.push(_doc.id);
    }
   });
    setArrayOfDocQuery(arr);

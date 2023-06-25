@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDocument } from "../hooks/useDocument";
 import Select from "react-select";
 import { useData } from '../hooks/useData';
-import { useAuthContext } from "../hooks/useAuthContext"; 
 import SellerStatisticQuery from "./SellerStatisticQuery";
 const SellerStatistic = ({id}) => {
 const {document,error}=useDocument('products',id);
@@ -12,7 +11,7 @@ const [product,setProduct]=useState();
 const [districtState,setDistrictState]=useState('');
 const [productSelect,setProductSelect]=useState('');
 const [distSelect,setDistSelect]=useState('')
-const [disabel,setDisabel]=useState(true);
+// const [disabel,setDisabel]=useState(true);
 const [showProd,setShowProd]=useState('');
 const [showDist,setShowDist] = useState('');
 const refProduct = useRef()
@@ -20,7 +19,7 @@ const refDist = useRef()
  const handleSubmit = (e)=>{
 e.preventDefault();
 if(productSelect&&distSelect){
-setDisabel(false);
+// setDisabel(false);
 setProduct(productSelect);
 setDistrictState(distSelect)
 refProduct.current.selectOption('');
@@ -82,7 +81,6 @@ ref={refDist}
  {showDist&&<span>{showDist}</span>}
 </div>
 </div>
-
 <div>
 {districtState&&product&&
 <SellerStatisticQuery district={districtState}

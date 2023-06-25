@@ -3,7 +3,8 @@ import { useQuery } from '../hooks/useQuery'
 import SellerStatisticQueryResult from './sellerStatisticQueryResult';
 const SellerStatisticQuery = ({district,product,userId}) => {
 const obj = Object.fromEntries(district); 
-const { arrayOfDocQuery, error} = useQuery("products",'region',obj,obj.value);
+const { arrayOfDocQuery,error } = useQuery("products",'region',obj,obj.value);
+console.log(arrayOfDocQuery)
 return (
 <div>
 {arrayOfDocQuery&&product&&
