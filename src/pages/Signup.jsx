@@ -15,6 +15,7 @@ const [seller,setSeller]=useState(false);
 const [username,setUsername]=useState('');
 const [email,setEmail]=useState('');
 const [emailMsg,setEmailMsg]=useState('');
+const [address,setAddress]=useState('');
 const [ps,setPS]=useState('');
 const [conformPS,setConformPS]=useState('');
 const [passwordMsg,setPasswordMsg]=useState('');
@@ -63,11 +64,12 @@ setEmail('');
 setConformPS('')
 }
 if(!state.seller){
-await signupBuyer(email, ps, username);
+await signupBuyer(email, ps, username,address);
 setPS("");
 setUsername("");
 setEmail("");
 setConformPS("");
+setAddress('')
 }
 }
 //handle with email
@@ -146,6 +148,23 @@ Email
 <small className="err-msg">{emailMsg}</small>
 }
 </div>
+{!seller&&
+<div className="input-wrapper">
+<input
+type="text"
+id="address"
+name="address"
+placeholder="Address"
+onChange={(e) => {
+setAddress(e.target.value);
+
+}}
+/>
+<label htmlFor="address" className="form-label">
+Address
+</label>
+</div>
+}
 {seller && (
 <>
 <div className="input-wrapper">

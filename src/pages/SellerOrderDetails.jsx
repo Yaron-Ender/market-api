@@ -37,7 +37,7 @@ return (
 <h3>Customer's Details :</h3>
   <h4> Name : <span>{document.buyerName}</span></h4>
   <h4>Email : <span>{document.buyerEmail}</span></h4>
-  <h4>Address : <span></span></h4>
+  <h4>Address : <span>{document.address}</span></h4>
  </header>
 <div className="order-products">
 {document.order.length>0&&

@@ -15,6 +15,7 @@ const TransactionLayout = () => {
 const {document,error} = useDocument('products',id)
 const { document: docSeller, error: errorUser } = useDocument("users",id);
 const { user }=useAuthContext();
+const {document:docBuyer,error:errorDOcBuyer}=useDocument('users',user.uid)
 const { addDocument } =useFirestore('orders');
 const { formatCurrency }=useHelper();
 const [basketArr,setBasketArr]=useState([]);
@@ -96,7 +97,7 @@ if(basketArr.find(obj=>obj.coast===0)){
     return;
 }
 if(confirm('Send Order?')){
-  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supplied:false,confirmOrder:false,createdAt:timestamp,orderRanked:0 });
+  await addDocument({ order: basketArr, sellerID: id, buyerID:user.uid,buyerName:user.displayName,buyerEmail:user.email,supplied:false,confirmOrder:false,createdAt:timestamp,orderRanked:0,address:docBuyer.address });
   navigate('/buyer/orders')
      return toast.success("you've sent your order successfully");
 }

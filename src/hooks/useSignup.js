@@ -57,7 +57,7 @@ setIsPending(false)
 //************************** */
 //Signup function for buyres
 //************************** */
-const signupBuyer =async(email, password, displayName) => {
+const signupBuyer =async(email, password, displayName,address) => {
 setIsPending(true)
 setErrorMsg(null)
 try{
@@ -71,7 +71,7 @@ setIsPending(false)
 const docReff =doc(db,'users',user.uid)
 const userDoc= await getDoc(docReff)
 if(!userDoc.exists()){
-setDoc(docReff, { displayName, id: user.uid,seller:false}); 
+setDoc(docReff, { displayName,id:user.uid,seller:false,address:address}); 
 dispatch({ type: "LOGIN", payload: { ...user,seller: false } });
 navigate('/buyer')
 }
