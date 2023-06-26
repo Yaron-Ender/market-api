@@ -50,17 +50,7 @@ the API distinguish between users who registered as sellers and users who regist
 
 ![Buyer order](/src/assets/buyerOrder.png)
 
-> all the runnig projects in the laboratory are organized by card
-![see projects](readme-assets/see%20project.png)
->all the project's tests are hidden in cards  behind their technology,by clicking the chevron the tests card become visible
-![opened test card](readme-assets/open%20tech%20chevron.png)
-> When the manager decide to assign a test to supervisor for approval, he choose supervisor from the supervisor list and attach him due date
 
-![supervisor due date](readme-assets/supervisor%20due%20date.png)
-
->*tests status*
-The tests status box allows the manager to be informed with the status of each test (for status indication meaning see below at the supervisor section)
-![status box](readme-assets/status%20box.png)
 
 
 
