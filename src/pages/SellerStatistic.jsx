@@ -11,15 +11,14 @@ const [product,setProduct]=useState();
 const [districtState,setDistrictState]=useState('');
 const [productSelect,setProductSelect]=useState('');
 const [distSelect,setDistSelect]=useState('')
-// const [disabel,setDisabel]=useState(true);
 const [showProd,setShowProd]=useState('');
-const [showDist,setShowDist] = useState('');
+const [showDist,setShowDist] = useState('')
+//close the progress bar when open one of the select box- the progress bar is in SellerStatisticQueryResult
 const refProduct = useRef()
 const refDist = useRef()
- const handleSubmit = (e)=>{
+const handleSubmit = (e)=>{
 e.preventDefault();
 if(productSelect&&distSelect){
-// setDisabel(false);
 setProduct(productSelect);
 setDistrictState(distSelect)
 refProduct.current.selectOption('');

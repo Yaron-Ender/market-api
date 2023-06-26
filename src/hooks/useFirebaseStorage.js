@@ -6,8 +6,6 @@ export const usefirebaseStorage = ()=>{
  const imageRef = ref(storage,`${photoURL}`)
  try{
 const photoURL=await getDownloadURL(imageRef);  
-if(!photoURL){
-}
 if(photoURL.includes('default-avatar')){
 return
 }

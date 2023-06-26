@@ -33,7 +33,6 @@ if(arrayOfDocQuery){
 if(arrayOfDocQuery.length>0){
 //if we chose region that is not the seller region we have know it in order to add it to the avg calculation
 if(arrayOfDocQuery.find(id=>id!==document.id)){
-console.log('not the same region')
 pricesArr2.push(userPrice[0]);
 }
 arrayOfDocQuery.forEach(async(id)=>{
@@ -41,7 +40,6 @@ const document = await getDocument(id);
 const extractPrice = document.products
 .filter((obj) => obj.product === product)
 .map((obj) => +obj.amount);
-console.log(extractPrice)
 pricesArr2.push(...extractPrice);
 setMin(Math.min(...pricesArr2))
 setMax(Math.max(...pricesArr2))

@@ -9,7 +9,7 @@ const deleteFromAuth = async()=>{
  return toast.success("you've deleted your acount!")
 }).catch((err)=>{
     console.log(err)
-     return toast.error("sorry , your acount couldn't be deleted");
+     return toast.error("sorry , your acount couldn't be deleted, please Login and try again");
     })
 }
 return{deleteFromAuth}
