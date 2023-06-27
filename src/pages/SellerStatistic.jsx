@@ -3,6 +3,7 @@ import { useDocument } from "../hooks/useDocument";
 import Select from "react-select";
 import { useData } from '../hooks/useData';
 import SellerStatisticQuery from "./SellerStatisticQuery";
+
 const SellerStatistic = ({id}) => {
 const {document,error}=useDocument('products',id);
 const { sellersRegion } = useData();

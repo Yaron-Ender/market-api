@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useActionData } from "react-router-dom";
 import AddproductForm from "../pages/AddproductForm";
 import wave from '../assets/wave.svg'
 import ProductSeller from "../pages/ProductSeller";
@@ -11,9 +12,16 @@ import SellerRank from "../component/SellerRank";
 import { useQueryRanks } from "../hooks/useQueryRanks";
 const SellerLayout = () => {
 const {user}=useAuthContext();
+//if product has been deleted from the product list(productSeller COMP) when the statistic panel working and this product is query by the statistic component we get error becuase is not exist any more, therefore closeStatisticPannel  varible turn to true in the sellerAction, when product has deleted 
+const closeStatisticPannel = useActionData();
 const { arrayOfRanks, error } = useQueryRanks("users");
 const [openstatistic, setOpenStatistic] = useState(false);
 const [openSpeach, setOpenSpeach] = useState(false);
+useEffect(()=>{
+if(closeStatisticPannel){
+setOpenStatistic(false)
+}
+},[closeStatisticPannel])
 const sidebarActions =(action)=>{
 switch(action){
 case 'statistic':
@@ -61,6 +69,7 @@ const { getDocument } = useFirestore('products')
 const data = await request.formData();
 const { _action,userID, ...val } = Object.fromEntries(data);
 let msg = null
+let closeStatisticPannel = false;
 //get old product
 const orgDocument = await getDocument(userID)
 const {products} = orgDocument
@@ -86,7 +95,8 @@ if(_action === "deleteProduct"){
 const newProductsArray = products.filter(objProduct=>objProduct.product!==val.product)
  updateDocuemt(userID, { products: newProductsArray });
  msg=null;
- return msg;
+ closeStatisticPannel = true;
+ return closeStatisticPannel ;
 }
 return msg
 }
