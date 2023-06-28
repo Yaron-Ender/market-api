@@ -3,6 +3,7 @@ import { useDocument } from "../hooks/useDocument";
 import { useCollection } from "../hooks/useCollection";
 import { useFirestore } from "../hooks/useFirestore";
 import { useHelper } from "../hooks/useHelper";
+import { set } from "date-fns";
 const SellerStatisticQueryResult = ({ arrayOfDocQuery,product,userId,district}) => {
 //REBUILD COMPONENT
 // //format currency
@@ -11,9 +12,31 @@ const [userPrice,setUserPrice]=useState('');
 const [userRegion,setUserRegion]=useState('');
 const [arrOfpricesState,setArrOfPricesState]=useState([]);
 const [avg,setAvg]=useState('');
+const [msg,setMsg]=useState('');
+const [solo,setSolo]=useState(false);
 //in order to get user price
 const { document } = useDocument("products",userId);
 const arrPrices=[]
+//handle with spacial cases that there is only one result
+const findSellerUniqueness = ()=>{
+//if[price]is the same price of the user and district is the same region of the user so it must be the user price
+if(userPrice&&userPrice===arrayOfDocQuery[0].productObject.amount&&
+  district===document.region.map(obj=>obj.label).find(label=>label===district)
+  ){
+setMsg(`🏆You are the only seller of ${product} in your district🏆`);
+setSolo(true)
+}
+//if after search in all the districts we get [price] that is the same price of the user it means that it's comes from the user
+if(district==="All Districts"&&userPrice&&userPrice===arrayOfDocQuery[0].productObject.amount){
+ setSolo(true);
+ setMsg(`🏆You are the only seller of ${product} in all districts🏆`); 
+}
+}
+//handle case of singel seller-empty array
+const handleSingelSeller =()=>{
+ setMsg(`Nobody sells ${product} in ${district} district`);
+ setSolo(true)
+}
 //USEEFFECT FOR EXTRACT USER PRICE AND REGION
 useEffect(()=>{
 if(document){
@@ -21,40 +44,50 @@ let productObj= document.products.find(obj =>obj.product === product);
 setUserPrice(productObj.amount)
 setUserRegion(document.region)
 }
-},[document])
+},[document,arrayOfDocQuery])
+//HANDLE WITH ARRAY OF DOC
 useEffect(()=>{
 if(arrayOfDocQuery&&arrayOfDocQuery.length>0){
+setMsg('');
+setSolo(false)
 arrayOfDocQuery.forEach((obj)=>{
 arrPrices.push(+obj.productObject.amount)
 })
+if(arrPrices.length===1){
+findSellerUniqueness()
+console.log('hai')
 }
+}else{
+handleSingelSeller()
+setAvg('')
+}
+if(arrayOfDocQuery.length>0){
 setAvg((prev)=>{
- prev = arrPrices.reduce((acc,curr)=>{
-  acc += curr;
-  return acc
+prev = arrPrices.reduce((acc,curr)=>{
+acc += curr;
+return acc
 },0)
 return prev / arrPrices.length
 })
-setArrOfPricesState(arrPrices)
+}
+console.log(avg)
 },[arrayOfDocQuery])
 
 
 return(
 <div className="result-statistic-container">
  {/* price is less than AVG */}
-{avg&&
- Number(avg).toFixed(2) - Number(userPrice).toFixed(2) > 0 && (
+{!solo&&Number(avg).toFixed(2) - Number(userPrice).toFixed(2) > 0 && (
 <div className="message">
 <span>
 Your price <span className="accent">{formatCurrency(userPrice)} </span> for product - <span className="accent">{product}</span> is less
 than the avarage price by {formatCurrency((avg - userPrice).toFixed(2) )}
- <span> in <span className="accent">{(district==='All Districts')?' All Districts':district+' district'}</span>  </span>
+ <span> in <span className="accent">{(district==='All Districts')?' All Districts':district+' district'}</span></span>
 </span>
 </div>
 )}
 {/* price is above AVG */}
-{avg&&
- Number(avg).toFixed(2) - Number(userPrice).toFixed(2) < 0 &&(
+{!solo&&Number(avg).toFixed(2) - Number(userPrice).toFixed(2) < 0 &&(
 <div className="message">
 <span>
 Your price <span className="accent">{formatCurrency(userPrice)} </span> for product - <span className="accent">{product}</span> is above
@@ -64,196 +97,27 @@ than the avarage price by {formatCurrency((userPrice - avg).toFixed(2) )}
 </div>
 )}
 {/* price is AVG */}
-{avg&&
- Number(avg).toFixed(2) - Number(userPrice).toFixed(2) === 0 &&(
+{!solo&&Number(avg).toFixed(2) - Number(userPrice).toFixed(2) === 0 &&(
 <div className="message">
 <span>
-Your price <span className="accent">{formatCurrency(userPrice)} </span> for product - <span className="accent">{product}</span> is the Avarage price
+Your price <span className="accent">{formatCurrency(userPrice)} </span> for product - <span className="accent">{product}</span> is the Avarage price 
  <span> in <span className="accent">{(district==='All Districts')?' All Districts':district+' district'}</span>  </span>
 </span>
 </div>
 )}
-
-
-{userPrice&&
-<h3>{userPrice}</h3>
+{/* nobody selles this product in this region */}
+{msg&&
+<div className="message">
+<span className="accent">{msg}</span>
+</div>
 }
-<ul>
-{arrOfpricesState.length>0&&
-arrOfpricesState.map((p,index)=>
-<li key={index}>{p}</li>
-)
-}
-</ul>
 {avg&&
-<p>the AVG price is {avg}</p>
+<div className="avg">
+<p>the AVG price is <span>{formatCurrency(avg)}</span></p>
+</div>
 }
-  </div>
+ </div>
 )
-
-
-// //in order to get products doc of every user
-//  const { getDocument } = useFirestore("products");
-//  //in order to get user price
-//  const { document } = useDocument("products",userId)
-// //in case of ALL DISTRICTS - doc of products
-// const {arrayOfDocID}=useCollection('products')
-// //format currency
-// const {formatCurrency}=useHelper();
-//     const [min, setMin] = useState(null);
-//     const [max, setMax] = useState(null);
-//     const [avg, setAvg] = useState("");
-//     const [userPrice,setUserPrice]=useState("");
-//     const [solo,setSolo]=useState(false)
-// useEffect(()=>{
-//   if(document){
-//     const price = document.products.filter(item=>item.product===product)
-//     .map(obj=>+obj.amount)
-//     setUserPrice(price)
-//   }   
-// },[document,product]) 
-
-// useEffect(()=>{
-// if(arrayOfDocQuery){
-//   const x =async ()=>{
-//     const pricesArr2 = [];
-// //if one of district has been chosen
-// if(arrayOfDocQuery.length>0){
-// //if we chose region that is not the seller region we have know it in order to add it to the avg calculation
-// if(arrayOfDocQuery.find(id=>id!==document.id)){
-// pricesArr2.push(userPrice[0]);
-// }
-// arrayOfDocQuery.forEach(async(id)=>{
-// const document = await getDocument(id);
-// const extractPrice = document.products
-// .filter((obj) => obj.product === product)
-// .map((obj) => +obj.amount);
-// pricesArr2.push(...extractPrice);
-// setMin(Math.min(...pricesArr2))
-// setMax(Math.max(...pricesArr2))
-//   setAvg((prev)=>{
-//   prev = pricesArr2.reduce((acc, curr) => {
-//     acc += curr;
-//     return acc
-//   }, 0);
-//   return (prev / pricesArr2.length).toFixed(2)
-// })
-// if (pricesArr2.length === 1&&min===max&&min===Number(userPrice[0])) {
-//   setSolo(true);
-// } else {
-//   setSolo(false);
-// }
-// })
-// }
-// //if all districts have been chosen
-// if(arrayOfDocQuery.length<1&&!district){
-// arrayOfDocID.forEach(async (id) => {
-// const document = await getDocument(id);
-// const extractPrice = document.products
-// .filter((obj) => obj.product === product)
-// .map((obj) => +obj.amount);
-// pricesArr2.push(...extractPrice);
-// setMin(Math.min(...pricesArr2));
-// setMax(Math.max(...pricesArr2));
-// setAvg((prev) => {
-// prev = pricesArr2.reduce((acc, curr) => {
-//   acc += curr;
-//   return acc;
-// }, 0);
-// return (prev / pricesArr2.length).toFixed(2);
-// });
-// if (pricesArr2.length === 1 ) {
-// setSolo(true)
-// }else{
-// setSolo(false)
-// }
-
-// });
-// }
-// }
-// x()
-// }
-// },[arrayOfDocQuery,product])
-
-
-
-
-//   return (
-//     <div className="result-statistic-container">
-// {/* price is less than AVG */}
-// {avg - Number(userPrice[0]).toFixed(2) > 0 && !solo && (
-// <div className="message">
-// <span>
-//   Your price <span className="accent">{formatCurrency(userPrice)} </span> for product - <span className="accent">{product}</span> is less
-//   than the avarage price at {formatCurrency((avg - userPrice).toFixed(2))}
-// </span>
-// </div>
-// )}
-
-// {/* price is above AVG */}
-//   {avg - Number(userPrice[0]).toFixed(2) < 0 && !solo && (
-//   <div className="message">
-// <span>
-//   Your price  <span className="accent">{formatCurrency(userPrice)} </span> for product - <span className="accent">{product}</span> is more
-//   than the avarage price at {(userPrice - avg).toFixed(2)}
-// </span>
-// </div>
-//       )}
-//  {avg - Number(userPrice[0]).toFixed(2) === 0 && !solo && (
-//   <div className="message">
-// <span>
-// Your price<span className="accent">{formatCurrency(userPrice)} </span> for product- <span className="accent">{product}</span> is the
-// avarage price
-// </span>
-// </div>
-//   )}
-//   {/* solo Seller in spesific region*/}
-// <div className="message">
-//   {solo && <span>🏆 You are the only seller of <span className="accent">{product}</span> in this district 🏆 </span>}
-// </div>
-// {/* no seller in this district */}
-// {min == "Infinity" && (
-// <div className="message">
-// <span>No seller sells this product in this district</span>
-// </div>
-// )}
-// {/* one Seller that is not the user */}
-//   {min===max&&avg!==Number(userPrice[0]).toFixed(2)&&
-//   <div className="">
-//     <small>There is only one seller of this product in this district</small>
-//   </div>
-//   }
-
-// <div className="avg">
-//   {avg && avg !== "NaN" && !solo && <span>The AVG price is {formatCurrency(avg)}</span>}
-// </div>
-// {/* PROGRESS BAR */}
-// {!solo && min != "Infinity" && max != "Infinity" && (
-//   <div className="progress-container">
-//     {min !== max &&
-//     <>
-//     <progress max={max}  value={Number(userPrice[0]).toFixed(2)}></progress>
-//    <div className="text-box">
-//       <span> {formatCurrency(0)} </span>
-//       <span>highest price  {formatCurrency(max)} </span>
-//     </div>
-//   </>
-//     }
-// {/*case that one product but not belong the user */}
-//     {min === max&&avg!==Number(userPrice[0]).toFixed(2) && 
-//     <>
-//     <progress max={max} value={Number(userPrice[0]).toFixed(2)}></progress>
-//     <div className="text-box">
-//       <span> {min} </span>
-//       <span>{avg}</span>
-//       <span> {max} </span>
-//     </div>
-//     </>
-//     }
-//   </div>
-// )}
-// </div>
-//   );
 
 };
 

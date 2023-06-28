@@ -14,6 +14,7 @@ const [productSelect,setProductSelect]=useState('');
 const [distSelect,setDistSelect]=useState('')
 const [showProd,setShowProd]=useState('');
 const [showDist,setShowDist] = useState('')
+const [closeStatisticPannel,setCloseStatisticPannel]=useState(true);
 //close the progress bar when open one of the select box- the progress bar is in SellerStatisticQueryResult
 const refProduct = useRef()
 const refDist = useRef()
@@ -26,6 +27,7 @@ refProduct.current.selectOption('');
 refDist.current.selectOption('');
 setShowProd(productSelect);
 setShowDist(Object.fromEntries(distSelect).label);
+setCloseStatisticPannel(false)
 }
 }
 
@@ -55,6 +57,7 @@ placeholder='Select Product'
 onChange={(option)=>{setProductSelect(option.value)
 setShowProd('');
 setShowDist("");
+setCloseStatisticPannel(true)
 }}
 ref={refProduct}
 />
@@ -70,6 +73,7 @@ onChange={(option)=>{
 setDistSelect(Object.entries(option))
 setShowDist('');
 setShowProd("");
+setCloseStatisticPannel(true)
 }}
 ref={refDist}
 />
@@ -82,7 +86,7 @@ ref={refDist}
 </div>
 </div>
 <div>
-{districtState&&product&&
+{districtState&&product&&!closeStatisticPannel&&
 <SellerStatisticQuery district={districtState}
  product={product}
  userId={id}
