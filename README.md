@@ -1,4 +1,4 @@
-# Lab Tasks Managmant
+# MARKET API 
 ## overView
 MARKET API connect between sellers who want to offer their goods and customers who look for purchases opportunity.
 The API is fully responsive
