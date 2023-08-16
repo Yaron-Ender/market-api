@@ -5,6 +5,7 @@ import { useFirestore } from "../hooks/useFirestore";
 import { useHelper } from "../hooks/useHelper";
 import { set } from "date-fns";
 const SellerStatisticQueryResult = ({ arrayOfDocQuery,product,userId,district}) => {
+  console.log(arrayOfDocQuery)
 //REBUILD COMPONENT
 // //format currency
  const {formatCurrency}=useHelper();
